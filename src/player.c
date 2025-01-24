@@ -17,42 +17,42 @@ void init_player(t_player *player)
 
 int key_press(int keycode, t_player *player)
 {
-    if (keycode == W)
+    if(keycode == W)
         player->key_up = true;
-    if (keycode == S)
+    if(keycode == S)
         player->key_down = true;
-    if (keycode == A)
+    if(keycode == A)
         player->key_left = true;
-    if (keycode == D)
+    if(keycode == D)
         player->key_right = true;
-    if (keycode == LEFT)
+    if(keycode == LEFT)
         player->left_rotate = true;
-    if (keycode == RIGHT)
+    if(keycode == RIGHT)
         player->right_rotate = true;
-    return (0);
+    return 0;
 }
 
 int key_release(int keycode, t_player *player)
 {
-    if (keycode == W)
+    if(keycode == W)
         player->key_up = false;
-    if (keycode == S)
+    if(keycode == S)
         player->key_down = false;
-    if (keycode == A)
+    if(keycode == A)
         player->key_left = false;
-    if (keycode == D)
+    if(keycode == D)
         player->key_right = false;
-    if (keycode == LEFT)
+    if(keycode == LEFT)
         player->left_rotate = false;
-    if (keycode == RIGHT)
+    if(keycode == RIGHT)
         player->right_rotate = false;
-    return (0);
+    return 0;
 }
 
-void    move_player(t_player *player)
+void move_player(t_player *player)
 {
-    int speed = 5;
-    float angle_speed = 0.1;
+    int speed = 3;
+    float angle_speed = 0.03;
     float cos_angle = cos(player->angle);
     float sin_angle = sin(player->angle);
 

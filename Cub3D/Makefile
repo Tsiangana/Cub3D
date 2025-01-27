@@ -18,12 +18,18 @@ LFLAGS = -L./includes/mlx -lmlx -lXext -lX11 -lm -lz
 INCLUDES = includes/mlx/libmlx.a
 SRC = src/main.c\
 		src/player.c\
-		src/get_next_line.c\
 		src/draw_line_map.c\
-		src/draw_map.c
+		src/draw_map.c\
+		src/grid_2d.c\
+		src/get_map/get_next_line.c\
+		src/get_map/get_nextline.c\
+		src/get_map/ft_split_aux.c\
+		src/get_map/ft_split.c\
+		libx/ft_strdup.c\
+		libx/ft_strcat.c\
+		libx/ft_strlen.c
 
 all: $(NAME)
-
 
 $(NAME): $(OBJ)
 	make -C ./includes/mlx

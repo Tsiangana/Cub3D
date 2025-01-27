@@ -12,10 +12,10 @@
 
 #include "../includes/game.h"
 
-void    init_game(t_game *game)
+void    init_game(t_game *game, char *str)
 {
     init_player(&game->player);
-    game->map = get_map();
+    game->map = get_map(str);
     game->mlx = mlx_init();
     game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "Game");
     game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
@@ -23,17 +23,21 @@ void    init_game(t_game *game)
     mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 }
 
-int main(void)
+int main(int ac, char **av)
 {
     t_game  game;
 
-    init_game(&game);
+    if (ac == 2)
+    {
+        init_game(&game, av[1]);
 
-    mlx_hook(game.win, 2, 1L<<0, key_press, &game.player);
-    mlx_hook(game.win, 3, 1L<<1, key_release, &game.player);
+        mlx_hook(game.win, 2, 1L<<0, key_press, &game.player);
+        mlx_hook(game.win, 3, 1L<<1, key_release, &game.player);
 
-    mlx_loop_hook(game.mlx, draw_loop, &game);
-    mlx_loop(game.mlx);
-
+        mlx_loop_hook(game.mlx, draw_loop, &game);
+        mlx_loop(game.mlx);
+    }
+    else
+        printf("error\nIncorrect Arguments");
     return (0);
 }

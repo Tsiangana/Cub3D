@@ -10,21 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/game.h"
+#include "../../includes/game.h"
 
-char **get_map(void)
+char	*alocate_space(char *content, char *buffer)
 {
-    char **map = malloc(sizeof(char *) * 11);
-    map[0] = "111111111111111";
-    map[1] = "100000000000001";
-    map[2] = "100000000000001";
-    map[3] = "100000100000001";
-    map[4] = "100000000000001";
-    map[5] = "100010000000001";
-    map[6] = "100000001000001";
-    map[7] = "100000000000001";
-    map[8] = "100000000000001";
-    map[9] = "111111111111111";
-    map[10] = NULL;
-    return (map);
+	char	*new_var;
+	char	*temp;
+
+	temp = content;
+	if (content == NULL)
+		new_var = ft_strdup(buffer);
+	else
+		new_var = ft_strcat(ft_strdup(content), buffer);
+	if (temp)
+		free(temp);
+	return (new_var);
+}
+
+char	**get_map(char *str)
+{
+	char	*cont_get;
+	char	**cont_split;
+	t_bytes	bit;
+
+	cont_get = get_nextline(str, &bit);
+	cont_split = ft_split(cont_get);
+	free(cont_get);
+	return (cont_split);
 }

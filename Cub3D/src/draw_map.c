@@ -37,11 +37,17 @@ void    draw_square(int x, int y, int size, int color, t_game *game)
 void    draw_map(t_game *game)
 {
     char **map = game->map;
-    int color = 0x0000FF;
+    int color = 0xFFFF00;
+    show_grid(game, '0', 0xE0FFFF);
     for (int y = 0; map[y]; y++)
+    {
         for(int x = 0; map[y][x]; x++)
+        {
             if (map[y][x] == '1')
-                draw_square(x * BLOCK, y * BLOCK, BLOCK, color, game);
+                show_square(x * BLOCK, y * BLOCK, BLOCK, color, game);
+        }
+    }
+    show_grid(game, '1', 0xE0FFFF);
 }
 
 void    clear_image(t_game *game)
@@ -54,7 +60,7 @@ void    clear_image(t_game *game)
 int draw_loop(t_game *game)
 {
     t_player *player = &game->player;
-    move_player(player);
+    move_player(player, game);
     clear_image(game);
     if (DEBUG)
     {

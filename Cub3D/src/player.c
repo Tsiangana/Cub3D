@@ -12,10 +12,10 @@
 
 #include "../includes/game.h"
 
-void init_player(t_player *player)
+void init_player(t_player *player, t_game *game)
 {
-    player->x = WIDTH / 2;
-    player->y = HEIGHT / 2;
+    player->x = game->WIDTH / 2;
+    player->y = game->HEIGHT / 2;
     player->angle = PI / 2;
 
     player->key_up = false;

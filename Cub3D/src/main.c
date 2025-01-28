@@ -12,13 +12,21 @@
 
 #include "../includes/game.h"
 
+static void point_view(t_game *game)
+{
+    if (game->DEBUG == 0)
+}
+
 void    init_game(t_game *game, char *str)
 {
-    init_player(&game->player);
+    point_view(&game);
+    game->HEIGHT = 720;
+    game->WIDTH = 1280;
+    init_player(&game->player, game);
     game->map = get_map(str);
     game->mlx = mlx_init();
-    game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "Game");
-    game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+    game->win = mlx_new_window(game->mlx, game->WIDTH, game->HEIGHT, "Game");
+    game->img = mlx_new_image(game->mlx, game->WIDTH, game->HEIGHT);
     game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian);
     mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 }
@@ -29,6 +37,7 @@ int main(int ac, char **av)
 
     if (ac == 2)
     {
+        game->DEBUG = 0;
         init_game(&game, av[1]);
 
         mlx_hook(game.win, 2, 1L<<0, key_press, &game.player);

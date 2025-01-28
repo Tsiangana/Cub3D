@@ -21,10 +21,7 @@
 #include <fcntl.h>
 #include <math.h>
 
-# define HEIGHT 720
-# define WIDTH 1280
 # define BLOCK 64
-# define DEBUG 1
 # define W 119
 # define A 97
 # define S 115
@@ -57,6 +54,7 @@ typedef struct s_game
     int endian;
     int HEIGHT;
     int WIDTH;
+    int DEBUG;
     char **map;
 
     t_player    player;
@@ -71,7 +69,7 @@ void    put_pixel(int x, int y, int color, t_game *game);
 void    draw_square(int x, int y, int size, int color, t_game *game);
 void    draw_map(t_game *game);
 void    clear_image(t_game *game);
-void    init_player(t_player *player);
+void    init_player(t_player *player, t_game *game);
 void    show_grid(t_game *game, char value, int color);
 void    move_player(t_player *player, t_game *game);
 void    draw_line(t_player *player, t_game *game, float start_x, int i);

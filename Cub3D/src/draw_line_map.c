@@ -44,16 +44,16 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 
     while (!touch(ray_x, ray_y, game))
     {
-        if (DEBUG)
+        if (game->DEBUG)
             put_pixel(ray_x, ray_y, 0x7FFFD4, game);
         ray_x += cos_angle;
         ray_y += sin_angle;
     }
-    if (!DEBUG)
+    if (!game->DEBUG)
     {
         float dist = fixed_dist(player->x, player->y, ray_x, ray_y, game);
-        float height = (BLOCK / dist) * (WIDTH / 2);
-        int start_y = (HEIGHT - height) / 2;
+        float height = (BLOCK / dist) * (game->WIDTH / 2);
+        int start_y = (game->HEIGHT - height) / 2;
         int end = start_y + height;
         while (start_y < end)
         {

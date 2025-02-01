@@ -30,6 +30,11 @@
 # define RIGHT 65363
 # define PI 3.14159265359
 
+# define ONE 49
+# define TWO 50
+
+typedef struct s_game t_game;
+
 typedef struct s_player
 {
     float x;
@@ -41,6 +46,8 @@ typedef struct s_player
     bool key_right;
     bool left_rotate;
     bool right_rotate;
+
+    t_game *game;
 }   t_player;
 
 typedef struct s_game
@@ -54,6 +61,8 @@ typedef struct s_game
     int endian;
     int HEIGHT;
     int WIDTH;
+    int height;
+    int width;
     int DEBUG;
     char **map;
 
@@ -75,7 +84,9 @@ void    move_player(t_player *player, t_game *game);
 void    draw_line(t_player *player, t_game *game, float start_x, int i);
 void    show_square(int x, int y, int size, int color, t_game *game);
 void	free_split(char **matriz);
+void	open_get_size(char *mapa, t_game *game);
 void	fill_matriz(char **matriz, char *s);
+void    responsivo(t_game *game);
 char	*get_nextline(char *str, t_bytes *bit);
 char    **get_map(char *str);
 char	**ft_split(char *s);

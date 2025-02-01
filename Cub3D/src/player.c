@@ -29,6 +29,8 @@ void init_player(t_player *player, t_game *game)
 
 int key_press(int keycode, t_player *player)
 {
+    t_game *game = (t_game *)player;
+
     if(keycode == W)
         player->key_up = true;
     if(keycode == S)
@@ -41,7 +43,7 @@ int key_press(int keycode, t_player *player)
         player->left_rotate = true;
     if(keycode == RIGHT)
         player->right_rotate = true;
-    return 0;
+    return (0);
 }
 
 int key_release(int keycode, t_player *player)
@@ -58,7 +60,7 @@ int key_release(int keycode, t_player *player)
         player->left_rotate = false;
     if(keycode == RIGHT)
         player->right_rotate = false;
-    return 0;
+    return (0);
 }
 
 void move_player(t_player *player, t_game *game)
@@ -92,13 +94,13 @@ void move_player(t_player *player, t_game *game)
     }
     if (player->key_left)
     {
-        new_x += cos_angle * speed;
-        new_y -= sin_angle * speed;
+        new_x += sin_angle * speed;
+        new_y -= cos_angle * speed;
     }
     if (player->key_right)
     {
-        new_x -= cos_angle * speed;
-        new_y += sin_angle * speed;
+        new_x -= sin_angle * speed;
+        new_y += cos_angle * speed;
     }
 
     if (!touch(new_x, player->y, game))

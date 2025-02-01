@@ -42,6 +42,11 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
     float ray_x = player->x;
     float ray_y = player->y;
 
+    float step_x = cos_angle;
+    float step_y = cos_angle;
+
+    int hit_vertical = 0;
+
     while (!touch(ray_x, ray_y, game))
     {
         if (game->DEBUG)
@@ -49,6 +54,16 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
         ray_x += cos_angle;
         ray_y += sin_angle;
     }
+
+    int wall_color = 0xFFFFFF;
+
+    if (hit_vertical)
+    {
+        if (step_x > 0)
+            wall_color = 0x00FF00;
+        else
+    }
+
     if (!game->DEBUG)
     {
         float dist = fixed_dist(player->x, player->y, ray_x, ray_y, game);
@@ -57,7 +72,7 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
         int end = start_y + height;
         while (start_y < end)
         {
-            put_pixel(i, start_y, 255, game);
+            put_pixel(i, start_y, 0xFFFF00, game);
             start_y++;
         }
     }

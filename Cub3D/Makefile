@@ -21,6 +21,7 @@ SRC = src/main.c\
 		src/draw_line_map.c\
 		src/draw_map.c\
 		src/grid_2d.c\
+		src/screens.c\
 		src/get_map/get_next_line.c\
 		src/get_map/get_nextline.c\
 		src/get_map/ft_split_aux.c\

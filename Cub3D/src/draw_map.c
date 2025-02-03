@@ -57,11 +57,31 @@ void    clear_image(t_game *game)
             put_pixel(x, y, 0, game);
 }
 
+void    draw_background(t_game *game)
+{
+    int x;
+    int y;
+    int sky_color = 0x87CEEB;
+    int floor_color = 0x8B4513;
+
+    for (y = 0; y < game->HEIGHT / 2; y++)
+    {
+        for (x = 0; x < game->WIDTH; x++)
+            put_pixel(x, y, sky_color, game);
+    }
+    for (y = game->HEIGHT / 2; y < game->HEIGHT; y++)
+    {
+        for (x = 0; x  < game->WIDTH; x++)
+            put_pixel(x, y, floor_color, game);
+    }
+}
+
 int draw_loop(t_game *game)
 {
     t_player *player = &game->player;
     move_player(player, game);
     clear_image(game);
+    draw_background(game);
     if (game->DEBUG)
     {
         draw_square(player->x, player->y, 10, 0x00FF00, game);

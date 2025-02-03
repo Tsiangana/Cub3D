@@ -32,6 +32,8 @@
 
 # define ONE 49
 # define TWO 50
+# define CLOSE 65288
+# define CLOSEBTN 65307
 
 typedef struct s_game t_game;
 
@@ -50,6 +52,17 @@ typedef struct s_player
     t_game *game;
 }   t_player;
 
+typedef struct s_textures
+{
+    void    *img;
+    char    *addr;
+    int width;
+    int height;
+    int bpp;
+    int line_length;
+    int endian;
+}   t_texture;
+
 typedef struct s_game
 {
     void    *mlx;
@@ -66,6 +79,7 @@ typedef struct s_game
     int DEBUG;
     char **map;
 
+    t_texture  textures[4];
     t_player    player;
 }   t_game;
 
@@ -87,6 +101,8 @@ void	free_split(char **matriz);
 void	open_get_size(char *mapa, t_game *game);
 void	fill_matriz(char **matriz, char *s);
 void    responsivo(t_game *game);
+void    draw_background(t_game *game);
+void    load_textures(t_game *game);
 char	*get_nextline(char *str, t_bytes *bit);
 char    **get_map(char *str);
 char	**ft_split(char *s);
@@ -95,7 +111,10 @@ char	*alocate_word(char *start, int len);
 char	*alocate_space(char *content, char *buffer);
 bool    touch(float px, float py, t_game *game);
 int draw_loop(t_game *game);
-int key_press(int keycode, t_player *player);
+int CloseWindow(t_game *game);
+int get_textures_color(t_texture *texture, int x, int y);
+int get_wall_texture(float step_x, float step_y);
+int key_press(int keycode, t_game *game);
 int key_release(int keycode, t_player *player);
 int	delimeter(char c);
 int	count_words(char *str);

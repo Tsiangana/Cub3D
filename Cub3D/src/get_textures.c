@@ -12,43 +12,52 @@
 
 #include "../includes/game.h"\
 
-void    load_textures(t_game *game)
+void load_textures(t_game *game)
 {
-    char    *texture_paths[4] = {
-        "../textures/one.xpm",
-        "../textures/two.xpm",
-        "../textures/three.xpm",
-        "../textures/four.xpm"
+    char *paths[4] = {
+        "textures/one.xpm",
+        "textures/two.xpm",
+        "textures/three.xpm",
+        "textures/four.xpm"
     };
 
     for (int i = 0; i < 4; i++)
     {
-        game->textures[i].img = mlx_xpm_file_to_image(game->mlx, texture_paths[i], &game->textures[i].width, &game->textures[i].height);
+        game->textures[i].img = mlx_xpm_file_to_image(game->mlx, paths[i],
+            &game->textures[i].width, &game->textures[i].height);
+        
         if (!game->textures[i].img)
         {
-            printf("error\nerro ao carregar imagens: %s\n", texture_paths[i]);
-            exit(EXIT_FAILURE);
+            printf("Error: Failed to load texture %s\n", paths[i]);
+            exit(1);
         }
-        game->textures[i].addr = mlx_get_data_addr(game->textures[i].img, &game->textures[i].bpp, &game->textures[i].line_length, &game->textures[i].endian);
+
+        game->textures[i].addr = mlx_get_data_addr(game->textures[i].img,
+            &game->textures[i].bpp, &game->textures[i].size_line, &game->textures[i].endian);
     }
 }
 
-int get_textures_color(t_texture *texture, int x, int y)
-{
-    char *pixel;
-    int color;
+/*---------------------------*/
 
-    if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
-        return (0);
-    pixel = texture->addr + (y * texture->line_length + x * (texture->bpp / 8));
-    color = *(unsigned int *)pixel;
-    return (color);
-}
 
-int get_wall_texture(float step_x, float step_y)
+int get_texture_id(float ray_x, float ray_y, t_game *game)
 {
-    if (fabs(step_x) > fabs(step_y))
-        return (step_x > 0) ? 2 : 3;
+    if (is_vertical_wall(ray_x, ray_y, game))
+    {
+        return (ray_x > game->player.x) ? 1 : 0;
+    }
     else
-        return (step_y > 0) ? 1 : 0;
+    {
+        return (ray_y > game->player.y) ? 3 : 2;
+    }
 }
+
+int is_vertical_wall(float x, float y, t_game *game)
+{
+    int grid_x = (int)x / BLOCK;
+    int grid_y = (int)y / BLOCK;
+
+    return (game->map[grid_y][grid_x + 1] == '1' || game->map[grid_y][grid_x - 1] == '1');
+}
+
+

@@ -53,69 +53,23 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
     if (!game->DEBUG)
     {
         float dist = fixed_dist(player->x, player->y, ray_x, ray_y, game);
-        if (dist <= 0) dist = 0.0001;  // Garante que dist nunca seja zero
-
         float height = (BLOCK / dist) * (game->WIDTH / 2);
-        if (height < 1) height = 1;  // Garante altura válida
 
-        int start_y = (game->HEIGHT - height) / 2;
-        int end = start_y + height;
+        int start_y = fmax(0, (game->HEIGHT - height) / 2);
+        int end_y = fmin(game->HEIGHT - 1, start_y + height);
 
-        int texture_id = get_wall_texture(cos_angle, sin_angle);
-        if (texture_id < 0 || texture_id >= 4) {
-            printf("Erro: ID de textura inválido: %d\n", texture_id);
-            return;
-        }
+        int texture_id = get_texture_id(ray_x, ray_y, game);
+        t_texture *tex = &game->textures[texture_id];
 
-        t_texture *texture = &game->textures[texture_id];
+        float wall_x = ray_x - floor(ray_x);
+        int tex_x = (int)(wall_x * tex->width);
 
-        int texture_x = (int)(ray_x * texture->width) % texture->width;
-        if (texture_x < 0) texture_x = 0;
-        if (texture_x >= texture->width) texture_x = texture->width - 1;
-
-        for (int y = start_y; y < end; y++)
+        for (int y = start_y; y < end_y; y++)
         {
-            int texture_y = 1;  // Valor seguro
-            if (height > 0)  // Garante que a divisão seja segura
-                texture_y = ((y - start_y) * texture->height) / height;
+            int tex_y = (int)((y - start_y) * tex->height / height);
+            int color = *(int *)(tex->addr + (tex_y * tex->size_line + tex_x * (tex->bpp / 8)));
 
-            if (texture_y < 0) texture_y = 0;
-            if (texture_y >= texture->height)
-                texture_y = texture->height - 1;
-
-            int color = get_textures_color(texture, texture_x, texture_y);
             put_pixel(i, y, color, game);
         }
     }
 }
-
-
-/*void draw_line(t_player *player, t_game *game, float start_x, int i)
-{
-    float cos_angle = cos(start_x);
-    float sin_angle = sin(start_x);
-    float ray_x = player->x;
-    float ray_y = player->y;
-
-    while (!touch(ray_x, ray_y, game))
-    {
-        if (game->DEBUG)
-            put_pixel(ray_x, ray_y, 0x7FFFD4, game);
-        ray_x += cos_angle;
-        ray_y += sin_angle;
-    }
-
-    if (!game->DEBUG)
-    {
-        float dist = fixed_dist(player->x, player->y, ray_x, ray_y, game);
-        float height = (BLOCK / dist) * (game->WIDTH / 2);
-        int start_y = (game->HEIGHT - height) / 2;
-        int end = start_y + height;
-
-        while (start_y < end)
-        {
-            put_pixel(i, start_y, 0x0FFF00, game);
-            start_y++;
-        }
-    }
-}*/

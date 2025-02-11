@@ -52,16 +52,16 @@ typedef struct s_player
     t_game *game;
 }   t_player;
 
-typedef struct s_textures
+typedef struct s_texture
 {
     void    *img;
     char    *addr;
-    int width;
-    int height;
-    int bpp;
-    int line_length;
-    int endian;
-}   t_texture;
+    int     width;
+    int     height;
+    int     bpp;
+    int     size_line;
+    int     endian;
+} t_texture;
 
 typedef struct s_game
 {
@@ -93,9 +93,10 @@ void    draw_square(int x, int y, int size, int color, t_game *game);
 void    draw_map(t_game *game);
 void    clear_image(t_game *game);
 void    init_player(t_player *player, t_game *game);
+void    draw_line_with_texture(t_player *player, t_game *game, float angle, int i);
 void    show_grid(t_game *game, char value, int color);
 void    move_player(t_player *player, t_game *game);
-void    draw_line(t_player *player, t_game *game, float start_x, int i);
+void    draw_line(t_player *player, t_game *game, float angle, int i);
 void    show_square(int x, int y, int size, int color, t_game *game);
 void	free_split(char **matriz);
 void	open_get_size(char *mapa, t_game *game);
@@ -110,15 +111,19 @@ char	**alocate_matriz(int word);
 char	*alocate_word(char *start, int len);
 char	*alocate_space(char *content, char *buffer);
 bool    touch(float px, float py, t_game *game);
-int draw_loop(t_game *game);
 int CloseWindow(t_game *game);
-int get_textures_color(t_texture *texture, int x, int y);
-int get_wall_texture(float step_x, float step_y);
+int draw_loop(t_game *game);
+int get_texture_color(t_texture texture, int x, int y);
 int key_press(int keycode, t_game *game);
 int key_release(int keycode, t_player *player);
 int	delimeter(char c);
 int	count_words(char *str);
 float distance(float x, float y);
 float fixed_dist(float x1, float y1, float x2, float y2, t_game *game);
+
+
+/*-------------------*/
+int get_texture_id(float ray_x, float ray_y, t_game *game);
+int is_vertical_wall(float x, float y, t_game *game);
 
 #endif

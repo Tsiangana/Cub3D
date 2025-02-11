@@ -82,6 +82,7 @@ int draw_loop(t_game *game)
     move_player(player, game);
     clear_image(game);
     draw_background(game);
+
     if (game->DEBUG)
     {
         draw_square(player->x, player->y, 10, 0x00FF00, game);
@@ -91,11 +92,13 @@ int draw_loop(t_game *game)
     float fraction = PI / 3 / game->WIDTH;
     float start_x = player->angle - PI / 6;
     int i = 0;
-    while(i < game->WIDTH)
+
+    while (i < game->WIDTH)
     {
         draw_line(player, game, start_x, i);
         start_x += fraction;
         i++;
     }
+
     mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 }

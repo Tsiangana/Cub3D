@@ -12,6 +12,9 @@
 
 #include "../includes/game.h"
 
+// 0: 3D View
+// 1: 2D View
+
 void    init_game(t_game *game, char *str)
 {
     game->DEBUG = 0;
@@ -25,6 +28,7 @@ void    init_game(t_game *game, char *str)
     game->img = mlx_new_image(game->mlx, game->WIDTH, game->HEIGHT);
     game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian);
     mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+    load_textures(game);
 }
 
 int main(int ac, char **av)

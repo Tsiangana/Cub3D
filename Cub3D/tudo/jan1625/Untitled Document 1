@@ -1,0 +1,71 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+#include <unistd.h>
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+
+#define MAX_BUILDINGS 100
+#define MAX_LENGTH 600
+
+typedef struct s_builds
+{
+    int type;
+    int id;
+    int x;
+    int y;
+}   t_builds;
+
+
+typedef struct s_vars
+{
+    t_builds    *casas;
+    t_builds    *edificios;
+    char    **pred;
+    int     num_ed;
+}   t_vars;
+
+int main()
+{
+    t_vars vars;
+
+    vars.casas = malloc(MAX_BUILDINGS * sizeof(char *));
+    vars.edificios = malloc(MAX_BUILDINGS * sizeof(char *));
+
+
+    /*for (int i = 0; i < MAX_BUILDINGS; i++) {
+        vars.casa[i] = malloc(MAX_LENGTH * sizeof(char));
+        vars.pred[i] = malloc(MAX_LENGTH * sizeof(char));
+        vars.all[i] = malloc(MAX_LENGTH * sizeof(char));
+    }*/
+    while (1)
+    {
+        int resources;
+        scanf("%d", &resources); fgetc(stdin);
+        int num_new_biuldings;
+        scanf("%d", &num_new_biuldings); fgetc(stdin);
+        printf("total: %d", num_new_biuldings);
+        vars.num_ed = num_new_biuldings;
+        /*for (int i = 0; i < num_new_biuldings; i++)
+        {
+            char buildings_prop[MAX_LENGTH];
+            scanf("%[^\n]", buildings_prop); fgetc(stdin);
+            if (strlen(buildings_prop) > 2 && strlen(buildings_prop) < 13)
+            {
+                strcpy(vars.casa[i], buildings_prop);
+            }
+            else if (strlen(buildings_prop) > 6)
+            {
+                strcpy(vars.pred[i], buildings_prop);
+            }
+            strcpy(vars.all[i], buildings_prop);
+        }*/
+
+        printf("TUBE 0 1;TUBE 0 2;POD 41 0 1 0 1;POD 42 0 2 0 2\n");
+    }
+    return (0);
+}
+

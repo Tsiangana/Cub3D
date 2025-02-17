@@ -17,7 +17,7 @@
 
 void    init_game(t_game *game, char *str)
 {
-    game->DEBUG = 0;
+    game->DEBUG = 1;
     game->map = get_map(str);
     open_get_size(str, game);
     responsivo(game);

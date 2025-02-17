@@ -57,22 +57,18 @@ void    clear_image(t_game *game)
             put_pixel(x, y, 0, game);
 }
 
-void    draw_background(t_game *game)
+void draw_background(t_game *game)
 {
-    int x;
-    int y;
     int sky_color = 0x87CEEB;
     int floor_color = 0x8B4513;
 
-    for (y = 0; y < game->HEIGHT / 2; y++)
+    for (int y = 0; y < game->HEIGHT / 2; y++)
     {
-        for (x = 0; x < game->WIDTH; x++)
+        for (int x = 0; x < game->WIDTH; x++)
+        {
             put_pixel(x, y, sky_color, game);
-    }
-    for (y = game->HEIGHT / 2; y < game->HEIGHT; y++)
-    {
-        for (x = 0; x  < game->WIDTH; x++)
-            put_pixel(x, y, floor_color, game);
+            put_pixel(x, game->HEIGHT - y - 1, floor_color, game);
+        }
     }
 }
 

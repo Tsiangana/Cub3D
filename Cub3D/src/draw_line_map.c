@@ -53,7 +53,7 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
     if (!game->DEBUG)
     {
         float dist = fixed_dist(player->x, player->y, ray_x, ray_y, game);
-        float height = (BLOCK / dist) * (game->WIDTH / 2);
+        float height = (BLOCK * game->HEIGHT) / (dist * 2);
 
         int start_y = fmax(0, (game->HEIGHT - height) / 2);
         int end_y = fmin(game->HEIGHT - 1, start_y + height);

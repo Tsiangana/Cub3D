@@ -35,6 +35,8 @@
 # define CLOSE 65288
 # define CLOSEBTN 65307
 
+#define MARGIN 8
+
 typedef struct s_game t_game;
 
 typedef struct s_player

@@ -141,8 +141,8 @@ void move_player(t_player *player, t_game *game)
         new_y += cos_angle * speed;
     }
 
-    if (!touch(new_x, player->y, game))
+    if (!touch(new_x + MARGIN, player->y, game) && !touch(new_x - MARGIN, player->y, game))
         player->x = new_x;
-    if (!touch(player->x, new_y, game))
+    if (!touch(player->x, new_y + MARGIN, game) && !touch(player->x, new_y - MARGIN, game))
         player->y = new_y;
 }

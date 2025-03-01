@@ -17,25 +17,27 @@ void load_textures(t_game *game)
 	int	i;
 
 	i = 0;
-	game->textures[0] = mlx_xpm_file_to_image(game->mlx, "textures/one.xpm",
+	game->textures[0] = mlx_xpm_file_to_image(game->mlx, "textures/test.xpm",
 			&game->tex_width, &game->tex_height);
-	game->textures[1] = mlx_xpm_file_to_image(game->mlx, "textures/two.xpm",
+	game->textures[1] = mlx_xpm_file_to_image(game->mlx, "textures/test.xpm",
 			&game->tex_width, &game->tex_height);
-	game->textures[2] = mlx_xpm_file_to_image(game->mlx, "textures/three.xpm",
+	game->textures[2] = mlx_xpm_file_to_image(game->mlx, "textures/test.xpm",
 			&game->tex_width, &game->tex_height);
-	game->textures[3] = mlx_xpm_file_to_image(game->mlx, "textures/four.xpm",
+	game->textures[3] = mlx_xpm_file_to_image(game->mlx, "textures/test.xpm",
 			&game->tex_width, &game->tex_height);
 	while (i < 4)
 	{
 		if (!game->textures[i])
 		{
 			printf("error: ao carregar textura %d\n", i);
+			CloseWindow(game);
 			exit(1);
 		}
 		game->tex_data[i] = mlx_get_data_addr(game->textures[i],
 				&game->tex_bpp[i], &game->tex_sl[i], &game->tex_end[i]);
 		i++;
 	}
+	game->block = game->tex_height;
 }
 
 void	render_texture_column(t_game *game, int texture_index, int column, int start_y, int end, int tex_x)

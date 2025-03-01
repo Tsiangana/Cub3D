@@ -17,8 +17,8 @@ bool    touch(float px, float py, t_game *game)
     int x;
     int y;
 
-    x = px / BLOCK;
-    y = py / BLOCK;
+    x = px / game->block;
+    y = py / game->block;
     if (game->map[y][x] == '1')
         return (true);
     return (false);    
@@ -68,7 +68,7 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 		game->x1 = player->x;
 		game->x2 = player->ray_x;
 		game->dist = fixed_dist(player->y, player->ray_y, game);
-		game->heightt = (BLOCK / game->dist) * (game->WIDTH / 2);
+		game->heightt = (game->block / game->dist) * (game->WIDTH / 2);
 		game->start_y = (game->HEIGHT - game->heightt) / 2;
 		game->end = game->start_y + game->heightt;
 		if (touch(player->ray_x - player->cos_angle, player->ray_y, game))

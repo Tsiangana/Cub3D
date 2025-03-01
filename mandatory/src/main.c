@@ -23,12 +23,12 @@ void init_game(t_game *game, char *str)
     responsivo(game);
     game->mlx = mlx_init();
     game->win = mlx_new_window(game->mlx, game->WIDTH, game->HEIGHT, "Game");
+    load_textures(game);
     mlx_hook(game->win, 17, 0, CloseWindow, game);
     init_player(&game->player, game);
     game->img = mlx_new_image(game->mlx, game->WIDTH, game->HEIGHT);
     game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian);
     mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-    load_textures(game);
 }
 
 int main(int ac, char **av)

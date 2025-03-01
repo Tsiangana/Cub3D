@@ -27,9 +27,17 @@ static void init_player_pos(t_player *player, t_game *game)
             c = game->map[y][x];
             if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
             {
-                player->x = x * 64 + 64 / 2;
-                player->y = y * 64 + 64 / 2;
-                player->angle = PI / 2;
+                player->x = x * game->block + game->block / 2;
+                player->y = y * game->block + game->block / 2;
+
+                if (c == 'N')
+                    player->angle = 3 * PI / 2; // 270° (Norte)
+                else if (c == 'S')
+                    player->angle = PI / 2; // 90° (Sul)
+                else if (c == 'E')
+                    player->angle = 0; // 0° (Leste)
+                else if (c == 'W')
+                    player->angle = PI; // 180° (Oeste)
 
                 game->map[y][x] = '0';
                 return ;
@@ -43,6 +51,7 @@ static void init_player_pos(t_player *player, t_game *game)
     player->y = game->HEIGHT / 2;
     player->angle = PI / 2;
 }
+
 
 void init_player(t_player *player, t_game *game)
 {
@@ -102,7 +111,7 @@ void move_player(t_player *player, t_game *game)
     float new_x;
     float new_y;
 
-    speed = 3;
+    speed = (int)(game->block / 18);
     angle_speed = 0.03;
     cos_angle = cos(player->angle);
     sin_angle = sin(player->angle);

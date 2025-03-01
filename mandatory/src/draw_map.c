@@ -60,7 +60,7 @@ void    draw_map(t_game *game)
         while (map[y][x])
         {
             if (map[y][x] == '1')
-                show_square(x * BLOCK, y * BLOCK, BLOCK, color, game);
+                show_square(x * game->block, y * game->block, game->block, color, game);
             x++;
         }
         y++;

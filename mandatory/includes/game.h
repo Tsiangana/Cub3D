@@ -85,6 +85,7 @@ typedef struct s_game
 	int    				tex_end[4];
     int			tex_width;
 	int			tex_height;
+    int         block;
     int					tex_y;
     int					pix_color;
     float				x1;

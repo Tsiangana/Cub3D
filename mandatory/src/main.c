@@ -12,6 +12,14 @@
 
 #include "../includes/game.h"
 
+static void init_images(t_game *game)
+{
+    game->textures[0] = NULL;
+    game->textures[1] = NULL;
+    game->textures[2] = NULL;
+    game->textures[3] = NULL;
+}
+
 // 0: 3D View
 // 1: 2D View
 
@@ -23,6 +31,7 @@ void init_game(t_game *game, char *str)
     responsivo(game);
     game->mlx = mlx_init();
     game->win = mlx_new_window(game->mlx, game->WIDTH, game->HEIGHT, "Game");
+    init_images(game);
     load_textures(game);
     mlx_hook(game->win, 17, 0, CloseWindow, game);
     init_player(&game->player, game);

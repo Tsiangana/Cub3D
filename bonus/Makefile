@@ -21,7 +21,20 @@ SRC = src/main.c\
 		src/pages/page_one.c\
 		src/pages/page_two.c\
 		src/pages/page_three.c\
-		src/levels/level_one.c
+		src/levels/level_one.c\
+		src/raycasting/draw_line_map.c\
+		src/raycasting/draw_map.c\
+		src/raycasting/get_textures.c\
+		src/raycasting/grid_2d.c\
+		src/raycasting/player.c\
+		src/raycasting/screens.c\
+		src/get_map/get_next_line.c\
+		src/get_map/get_nextline.c\
+		src/get_map/ft_split_aux.c\
+		src/get_map/ft_split.c\
+		libx/ft_strdup.c\
+		libx/ft_strcat.c\
+		libx/ft_strlen.c
 
 all: $(NAME)
 

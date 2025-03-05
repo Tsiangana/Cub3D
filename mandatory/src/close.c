@@ -15,16 +15,23 @@
 int    CloseWindow(t_game *game)
 {
     int i;
+    int on;
 
     i = 0;
+    on = 0;
     free_split(game->map);
     while (i < 4)
     {
         if (game->textures[i])
+        {
             mlx_destroy_image(game->mlx, game->textures[i]);
+            game->textures[i] = NULL;
+            on++;
+        }
         i++;
     }
-    mlx_destroy_image(game->mlx, game->img);
+    if (on == 4)
+        mlx_destroy_image(game->mlx, game->img);
     mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
     free(game->mlx);

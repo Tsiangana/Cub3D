@@ -80,5 +80,5 @@ void    page_three(t_game *game)
     init_image(game);
     put_letters(game);
     mlx_hook(game->wins[2], 17, 0, ending_page_two, game);
-    mlx_hook(game->wins[1], 2, 1L<<0, next_page, game);
+    mlx_hook(game->wins[2], 2, 1L<<0, next_page, game);
 }

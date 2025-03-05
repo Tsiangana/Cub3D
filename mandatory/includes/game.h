@@ -50,13 +50,10 @@ typedef struct s_player
     bool key_right;
     bool left_rotate;
     bool right_rotate;
-
-    /*Cell*/
     float	cos_angle;
 	float	sin_angle;
     float	ray_x;
 	float	ray_y;
-    /*Cell*/
 
     t_game *game;
 }   t_player;

@@ -10,27 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/game.h"
+#include "../../includes/game.h"
 
 void load_textures(t_game *game)
 {
 	int	i;
 
 	i = 0;
-	game->textures[0] = mlx_xpm_file_to_image(game->mlx, "textures/test.xpm",
+	game->textures[0] = mlx_xpm_file_to_image(game->mlxs[0], "assets/levels/level1/wall01.xpm",
 			&game->tex_width, &game->tex_height);
-	game->textures[1] = mlx_xpm_file_to_image(game->mlx, "textures/test.xpm",
+	game->textures[1] = mlx_xpm_file_to_image(game->mlxs[0], "assets/levels/level1/wall01.xpm",
 			&game->tex_width, &game->tex_height);
-	game->textures[2] = mlx_xpm_file_to_image(game->mlx, "textures/test.xpm",
+	game->textures[2] = mlx_xpm_file_to_image(game->mlxs[0], "assets/levels/level1/wall01.xpm",
 			&game->tex_width, &game->tex_height);
-	game->textures[3] = mlx_xpm_file_to_image(game->mlx, "textures/test.xpm",
+	game->textures[3] = mlx_xpm_file_to_image(game->mlxs[0], "assets/levels/level1/wall01.xpm",
 			&game->tex_width, &game->tex_height);
+	game->page.life = mlx_xpm_file_to_image(game->mlxs[0], "assets/life.xpm", &game->page.life_w, &game->page.life_h);
 	while (i < 4)
 	{
-		if (!game->textures[i])
+		if (!game->textures[i] || !game->page.life)
 		{
 			printf("error: ao carregar textura %d\n", i);
-			CloseWindow(game);
+			CloseLevelOne(game);
 		}
 		game->tex_data[i] = mlx_get_data_addr(game->textures[i],
 				&game->tex_bpp[i], &game->tex_sl[i], &game->tex_end[i]);
@@ -57,7 +58,7 @@ void	render_texture_column(t_game *game, int texture_index, int column, int star
 			game->tex_y = game->tex_height - 1;
 		game->pix_color = *(int *)(data + (game->tex_y
 					* sl + tex_x * (bpp / 8)));
-		game->pix_color = mlx_get_color_value(game->mlx, game->pix_color);
+		game->pix_color = mlx_get_color_value(game->mlxs[0], game->pix_color);
 		put_pixel(column, y, game->pix_color, game);
 		y++;
 	}

@@ -20,7 +20,7 @@ int    CloseLevelOne(t_game *game)
     i = 0;
     on = 0;
     free_split(game->map);
-    while (i < 4)
+    while (i < 5)
     {
         if (game->textures[i])
         {
@@ -30,7 +30,8 @@ int    CloseLevelOne(t_game *game)
         }
         i++;
     }
-    if (on == 4)
+    mlx_destroy_image(game->mlxs[0], game->page.life);
+    if (on == 5)
         mlx_destroy_image(game->mlxs[0], game->img);
     mlx_destroy_window(game->mlxs[0], game->wins[3]);
 	mlx_destroy_display(game->mlxs[0]);
@@ -43,6 +44,7 @@ void init_game(t_game *game, char *str)
 {
     game->DEBUG = 0;
     game->live = 3;
+    game->open = 0;
     game->map = get_map(str);
     open_get_size(str, game);
     responsivo(game);

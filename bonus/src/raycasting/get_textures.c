@@ -14,23 +14,25 @@
 
 void load_textures(t_game *game)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	game->textures[0] = mlx_xpm_file_to_image(game->mlxs[0], "assets/levels/level1/wall01.xpm",
-			&game->tex_width, &game->tex_height);
+		&game->tex_width, &game->tex_height);
 	game->textures[1] = mlx_xpm_file_to_image(game->mlxs[0], "assets/levels/level1/wall01.xpm",
-			&game->tex_width, &game->tex_height);
+		&game->tex_width, &game->tex_height);
 	game->textures[2] = mlx_xpm_file_to_image(game->mlxs[0], "assets/levels/level1/wall01.xpm",
-			&game->tex_width, &game->tex_height);
+		&game->tex_width, &game->tex_height);
 	game->textures[3] = mlx_xpm_file_to_image(game->mlxs[0], "assets/levels/level1/wall01.xpm",
-			&game->tex_width, &game->tex_height);
+		&game->tex_width, &game->tex_height);
+	game->textures[4] = mlx_xpm_file_to_image(game->mlxs[0], "assets/levels/level1/door.xpm",
+		&game->tex_width, &game->tex_height);
 	game->page.life = mlx_xpm_file_to_image(game->mlxs[0], "assets/life.xpm", &game->page.life_w, &game->page.life_h);
-	while (i < 4)
+	while (i < 5)
 	{
 		if (!game->textures[i] || !game->page.life)
 		{
-			printf("error: ao carregar textura %d\n", i);
+			printf("error: ao carregar textura \n");
 			CloseLevelOne(game);
 		}
 		game->tex_data[i] = mlx_get_data_addr(game->textures[i],
@@ -40,12 +42,12 @@ void load_textures(t_game *game)
 	game->block = game->tex_height;
 }
 
-void	render_texture_column(t_game *game, int texture_index, int column, int start_y, int end, int tex_x)
+void render_texture_column(t_game *game, int texture_index, int column, int start_y, int end, int tex_x)
 {
-	int		y;
-	int		bpp;
-	int		sl;
-	char	*data;
+	int y;
+	int bpp;
+	int sl;
+	char *data;
 
 	bpp = game->tex_bpp[texture_index];
 	sl = game->tex_sl[texture_index];
@@ -56,11 +58,9 @@ void	render_texture_column(t_game *game, int texture_index, int column, int star
 		game->tex_y = ((y - start_y) * game->tex_height) / (end - start_y);
 		if (game->tex_y >= game->tex_height)
 			game->tex_y = game->tex_height - 1;
-		game->pix_color = *(int *)(data + (game->tex_y
-					* sl + tex_x * (bpp / 8)));
+		game->pix_color = *(int *)(data + (game->tex_y * sl + tex_x * (bpp / 8)));
 		game->pix_color = mlx_get_color_value(game->mlxs[0], game->pix_color);
 		put_pixel(column, y, game->pix_color, game);
 		y++;
 	}
 }
-

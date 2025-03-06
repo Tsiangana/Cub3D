@@ -34,8 +34,11 @@
 # define TWO 50
 # define CLOSE 65288
 # define CLOSEBTN 65307
+# define X 120
+# define ENTER 65293
 
 #define MARGIN 8
+#define MINIMAP_SCALE 0.1
 
 typedef struct s_game t_game;
 
@@ -88,11 +91,11 @@ typedef struct s_game
     int DEBUG;
     int live;
     char **map;
-    void		*textures[4];
-    char		*tex_data[4];
-    int					tex_bpp[4];
-	int					tex_sl[4];
-	int    				tex_end[4];
+    void		*textures[5];
+    char		*tex_data[5];
+    int					tex_bpp[5];
+	int					tex_sl[5];
+	int    				tex_end[5];
     int			tex_width;
 	int			tex_height;
     int         block;
@@ -104,6 +107,8 @@ typedef struct s_game
 	float				heightt;
     int					start_y;
     int					end;
+    int                 hit_type;
+    int                 open;
     t_player    player;
     t_pages page;
 }   t_game;

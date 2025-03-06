@@ -20,7 +20,19 @@ bool    touch(float px, float py, t_game *game)
     x = px / game->block;
     y = py / game->block;
     if (game->map[y][x] == '1')
+	{
+		game->hit_type = 1;
         return (true);
+	}
+	else if (game->map[y][x] == 'D')
+	{
+		if (game->open == 0)
+		{
+			game->hit_type = 2;
+			return (true);
+		}
+	}
+	game->hit_type = 0;
     return (false);    
 }
 
@@ -47,6 +59,7 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 {
 	int	texture_index;
 	int	tex_x;
+	game->hit_type = 0;
 
 	player->cos_angle = cos(start_x);
 	player->sin_angle = sin(start_x);
@@ -62,9 +75,16 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 	if (!game->DEBUG)
 	{
 		if (touch(player->ray_x - player->cos_angle, player->ray_y, game))
-			texture_index = (player->ray_y > player->y) ? 0 : 1;
+		{
+			if (game->hit_type == 2)
+				texture_index = 4;
+			else
+				texture_index = (player->ray_y > player->y) ? 0 : 1;
+		}
 		else
+		{
 			texture_index = (player->ray_x < player->x) ? 2 : 3;
+		}
 		game->x1 = player->x;
 		game->x2 = player->ray_x;
 		game->dist = fixed_dist(player->y, player->ray_y, game);

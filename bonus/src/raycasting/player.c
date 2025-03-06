@@ -68,17 +68,21 @@ void init_player(t_player *player, t_game *game)
 
 int key_press(int keycode, t_game *game)
 {
-    if(keycode == W)
+    if (keycode == W)
         game->player.key_up = true;
-    if(keycode == S)
+    if (keycode == S)
         game->player.key_down = true;
-    if(keycode == A)
+    if (keycode == A)
         game->player.key_left = true;
-    if(keycode == D)
+    if (keycode == D)
         game->player.key_right = true;
-    if(keycode == LEFT)
+    if (keycode == ENTER)
+        game->open = 1;
+    if (keycode == X)
+        game->open = 0;
+    if (keycode == LEFT)
         game->player.left_rotate = true;
-    if(keycode == RIGHT)
+    if (keycode == RIGHT)
         game->player.right_rotate = true;
     if (keycode == CLOSE || keycode == CLOSEBTN)
         CloseLevelOne(game);

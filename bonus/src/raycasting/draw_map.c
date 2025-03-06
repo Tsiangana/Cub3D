@@ -113,29 +113,66 @@ static void showing_lives(t_game *game)
 {
     if (game->live == 3)
     {
-        mlx_string_put(game->mlxs[0], game->wins[2], 10, 10, 0xFFFFFF,"Vidas: 3");
+        mlx_string_put(game->mlxs[0], game->wins[3], 10, 10, 0xFFFFFF,"Vidas: 3");
         mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 20, 10);
         mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 80, 10);
         mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 140, 10);
     }
     else if (game->live == 2)
     {
-        mlx_string_put(game->mlxs[0], game->wins[2], 10, 10, 0xFFFFFF,"Vidas: 2");
+        mlx_string_put(game->mlxs[0], game->wins[3], 10, 10, 0xFFFFFF,"Vidas: 2");
         mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 20, 10);
         mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 80, 10);
     }
     else if (game->live == 1)
     {
-        mlx_string_put(game->mlxs[0], game->wins[2], 10, 10, 0xFFFFFF,"Vidas: 1");
+        mlx_string_put(game->mlxs[0], game->wins[3], 10, 10, 0xFFFFFF,"Vidas: 1");
         mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 20, 10);
     }
     else
     {
-        mlx_string_put(game->mlxs[0], game->wins[2], 10, 10, 0xFFFFFF,"You Lose");
+        mlx_string_put(game->mlxs[0], game->wins[3], 10, 10, 0xFFFFFF,"You Lose");
     }
-    mlx_string_put(game->mlxs[0], game->wins[2], 870, 20, 0xFFFFFF,"Find the coin to Win the Game !");
+    mlx_string_put(game->mlxs[0], game->wins[3], 870, 20, 0xFFFFFF,"Find the coin to Win the Game !");
     return ;
 }
+
+static void draw_minimap(t_game *game)
+{
+    int x, y;
+    int block_size = game->block * MINIMAP_SCALE;
+    int minimap_size = 6; // Define quantos blocos ao redor do jogador serão exibidos
+
+    int player_map_x = game->player.x / game->block;
+    int player_map_y = game->player.y / game->block;
+
+    int minimap_x = game->WIDTH - (minimap_size * block_size) - 20; // Canto superior direito
+    int minimap_y = 20;
+
+    for (y = -minimap_size / 2; y < minimap_size / 2; y++)
+    {
+        for (x = -minimap_size / 2; x < minimap_size / 2; x++)
+        {
+            int map_x = player_map_x + x;
+            int map_y = player_map_y + y;
+
+            if (map_x >= 0 && map_y >= 0 && game->map[map_y] && game->map[map_y][map_x])
+            {
+                if (game->map[map_y][map_x] == '1')
+                    show_square(minimap_x + (x + minimap_size / 2) * block_size, minimap_y + (y + minimap_size / 2) * block_size, block_size, 0xFFFFFF, game);
+                else
+                    show_square(minimap_x + (x + minimap_size / 2) * block_size, minimap_y + (y + minimap_size / 2) * block_size, block_size,  0x1388ef , game);
+            }
+        }
+    }
+
+    // Desenha o jogador no minimapa (sempre no centro da área visível)
+    int player_x = minimap_x + (minimap_size / 2) * block_size;
+    int player_y = minimap_y + (minimap_size / 2) * block_size;
+    draw_square(player_x - 2, player_y - 2, 5, 0xFF0000, game); // Vermelho para o jogador
+}
+
+
 
 int draw_loop(t_game *game)
 {
@@ -163,6 +200,7 @@ int draw_loop(t_game *game)
         i++;
     }
     mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->img, 0, 0);
-    //showing_lives(game);
+    showing_lives(game);
+    draw_minimap(game);
     return (0);
 }

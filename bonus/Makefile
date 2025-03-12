@@ -18,10 +18,12 @@ LFLAGS = -L./includes/mlx -lmlx -lXext -lX11 -lm -lz
 INCLUDES = includes/mlx/libmlx.a
 SRC = src/main.c\
 		src/close.c\
+		src/mensages.c\
 		src/pages/page_one.c\
 		src/pages/page_two.c\
 		src/pages/page_three.c\
 		src/levels/level_one.c\
+		src/levels/aux.c\
 		src/raycasting/draw_line_map.c\
 		src/raycasting/draw_map.c\
 		src/raycasting/get_textures.c\

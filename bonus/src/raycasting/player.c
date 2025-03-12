@@ -12,6 +12,43 @@
 
 #include "../../includes/game.h"
 
+static bool touch_aux(float px, float py, t_game *game)
+{
+    int x = px / game->block;
+    int y = py / game->block;
+    
+    if(game->coins == 0)
+    {
+        youwin();
+        CloseLevelOne(game);
+    }
+
+    if (game->map[y][x] == '1')
+    {
+        game->hit_type = 1;
+        return (true);
+    }
+    else if (game->map[y][x] == 'D')
+    {
+        if (game->open == 0)
+        {
+            game->hit_type = 2;
+            return (true);
+        }
+    }
+    else if (game->map[y][x] == 'C')
+    {
+        game->map[y][x] = '0';
+        game->coins--;
+        game->hit_type = 3;
+        return (false);
+    }
+
+    game->hit_type = 0;
+    return (false);
+}
+
+
 static void init_player_pos(t_player *player, t_game *game)
 {
     int y;
@@ -154,8 +191,8 @@ void move_player(t_player *player, t_game *game)
         new_y += cos_angle * speed;
     }
 
-    if (!touch(new_x + MARGIN, player->y, game) && !touch(new_x - MARGIN, player->y, game))
+    if (!touch_aux(new_x + MARGIN, player->y, game) && !touch(new_x - MARGIN, player->y, game))
         player->x = new_x;
-    if (!touch(player->x, new_y + MARGIN, game) && !touch(player->x, new_y - MARGIN, game))
+    if (!touch_aux(player->x, new_y + MARGIN, game) && !touch(player->x, new_y - MARGIN, game))
         player->y = new_y;
 }

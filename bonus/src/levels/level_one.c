@@ -20,7 +20,7 @@ int    CloseLevelOne(t_game *game)
     i = 0;
     on = 0;
     free_split(game->map);
-    while (i < 5)
+    while (i < 14)
     {
         if (game->textures[i])
         {
@@ -31,7 +31,7 @@ int    CloseLevelOne(t_game *game)
         i++;
     }
     mlx_destroy_image(game->mlxs[0], game->page.life);
-    if (on == 5)
+    if (on == 14)
         mlx_destroy_image(game->mlxs[0], game->img);
     mlx_destroy_window(game->mlxs[0], game->wins[3]);
 	mlx_destroy_display(game->mlxs[0]);
@@ -40,13 +40,39 @@ int    CloseLevelOne(t_game *game)
     return (0);
 }
 
+int mouse_move(t_game *game)
+{
+    int x, y;
+    float angle_speed = 0.002;
+
+    mlx_mouse_get_pos(game->mlxs[0], game->wins[3], &x, &y);
+
+    static int last_x = -1;
+    if (last_x == -1)
+        last_x = x;
+
+    game->player.angle += (x - last_x) * angle_speed;
+
+    if (game->player.angle > 2 * PI)
+        game->player.angle -= 2 * PI;
+    if (game->player.angle < 0)
+        game->player.angle += 2 * PI;
+
+    last_x = x;
+
+    draw_loop(game);
+
+    return (0);
+}
+
 void init_game(t_game *game, char *str)
 {
     game->DEBUG = 0;
-    game->live = 3;
     game->open = 0;
+    game->coin = 0;
     game->map = get_map(str);
     open_get_size(str, game);
+    game->coins = count_coins(game->map);
     responsivo(game);
     game->wins[3] = mlx_new_window(game->mlxs[0], game->WIDTH, game->HEIGHT, "Ori - Level one");
     load_textures(game);
@@ -64,5 +90,6 @@ void level_one(t_game *game)
     mlx_hook(game->wins[3], 2, 1L << 0, key_press, game);
     mlx_hook(game->wins[3], 3, 1L << 1, key_release, &game->player);
 
-    mlx_loop_hook(game->mlxs[0], draw_loop, game);
+    mlx_loop_hook(game->mlxs[0], mouse_move, game);
+    //mlx_loop_hook(game->mlxs[0], draw_loop, game);
 }

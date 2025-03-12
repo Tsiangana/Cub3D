@@ -111,29 +111,27 @@ void draw_background(t_game *game)
 
 static void showing_lives(t_game *game)
 {
-    if (game->live == 3)
+    if (game->coins >= 3)
     {
-        mlx_string_put(game->mlxs[0], game->wins[3], 10, 10, 0xFFFFFF,"Vidas: 3");
-        mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 20, 10);
-        mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 80, 10);
-        mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 140, 10);
+        mlx_string_put(game->mlxs[0], game->wins[3], 20, 20, 0xFFFFFF,"coins: 3+");
+        mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 20, 30);
+        mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 50, 30);
+        mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 80, 30);
     }
-    else if (game->live == 2)
+    else if (game->coins == 2)
     {
-        mlx_string_put(game->mlxs[0], game->wins[3], 10, 10, 0xFFFFFF,"Vidas: 2");
-        mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 20, 10);
-        mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 80, 10);
+        mlx_string_put(game->mlxs[0], game->wins[3], 20, 20, 0xFFFFFF,"coins: 2");
+        mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 20, 30);
+        mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 50, 30);
     }
-    else if (game->live == 1)
+    else if (game->coins == 1)
     {
-        mlx_string_put(game->mlxs[0], game->wins[3], 10, 10, 0xFFFFFF,"Vidas: 1");
-        mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 20, 10);
-    }
-    else
-    {
-        mlx_string_put(game->mlxs[0], game->wins[3], 10, 10, 0xFFFFFF,"You Lose");
+        mlx_string_put(game->mlxs[0], game->wins[3], 20, 20, 0xFFFFFF,"coins: 1");
+        mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->page.life, 20, 30);
     }
     mlx_string_put(game->mlxs[0], game->wins[3], 870, 20, 0xFFFFFF,"Find the coin to Win the Game !");
+    mlx_string_put(game->mlxs[0], game->wins[3], 1700, 960, 0xFFFFFF,"Use X to close the door !");
+    mlx_string_put(game->mlxs[0], game->wins[3], 1700, 980, 0xFFFFFF,"Use ENTER to open the door");
     return ;
 }
 
@@ -141,12 +139,12 @@ static void draw_minimap(t_game *game)
 {
     int x, y;
     int block_size = game->block * MINIMAP_SCALE;
-    int minimap_size = 6; // Define quantos blocos ao redor do jogador serão exibidos
+    int minimap_size = 6;
 
     int player_map_x = game->player.x / game->block;
     int player_map_y = game->player.y / game->block;
 
-    int minimap_x = game->WIDTH - (minimap_size * block_size) - 20; // Canto superior direito
+    int minimap_x = game->WIDTH - (minimap_size * block_size) - 20;
     int minimap_y = 20;
 
     for (y = -minimap_size / 2; y < minimap_size / 2; y++)
@@ -166,10 +164,9 @@ static void draw_minimap(t_game *game)
         }
     }
 
-    // Desenha o jogador no minimapa (sempre no centro da área visível)
     int player_x = minimap_x + (minimap_size / 2) * block_size;
     int player_y = minimap_y + (minimap_size / 2) * block_size;
-    draw_square(player_x - 2, player_y - 2, 5, 0xFF0000, game); // Vermelho para o jogador
+    draw_square(player_x - 2, player_y - 2, 5, 0xFF0000, game);
 }
 
 

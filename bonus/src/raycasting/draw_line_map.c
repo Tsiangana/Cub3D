@@ -12,6 +12,34 @@
 
 #include "../../includes/game.h"
 
+static int	value_coin(t_game *game)
+{
+	game->coin++;
+	if (game->coin >= 0 && game->coin <= 300)
+		return (5);
+	else if (game->coin >= 301 && game->coin <= 600)
+		return (6);
+	else if (game->coin >= 601 && game->coin <= 900)
+		return (7);
+	else if (game->coin >= 901 && game->coin <= 1200)
+		return (8);
+	else if (game->coin >= 1201 && game->coin <= 1500)
+		return (9);
+	else if (game->coin >= 1501 && game->coin <= 1800)
+		return (10);
+	else if (game->coin >= 1801 && game->coin <= 2100)
+		return (11);
+	else if (game->coin >= 2101 && game->coin <= 2400)
+		return (12);
+	else if (game->coin >= 2401 && game->coin <= 2800)
+	{
+		game->coin = 0;
+		return (13);
+	}
+	return (5);
+}
+
+
 bool    touch(float px, float py, t_game *game)
 {
     int x;
@@ -32,13 +60,18 @@ bool    touch(float px, float py, t_game *game)
 			return (true);
 		}
 	}
+	else if (game->map[y][x] == 'C')
+	{
+		game->hit_type = value_coin(game);
+		return (true);
+	}
 	game->hit_type = 0;
-    return (false);    
+    return (false);
 }
 
 float distance(float x, float y)
 {
-    return sqrt(x * x + y * y);    
+    return sqrt(x * x + y * y);
 }
 
 float fixed_dist(float y1, float y2, t_game *game)
@@ -78,6 +111,8 @@ void draw_line(t_player *player, t_game *game, float start_x, int i)
 		{
 			if (game->hit_type == 2)
 				texture_index = 4;
+			else if (game->hit_type >= 5 && game->hit_type <= 13)
+				texture_index = game->hit_type;
 			else
 				texture_index = (player->ray_y > player->y) ? 0 : 1;
 		}

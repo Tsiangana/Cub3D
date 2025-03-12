@@ -91,11 +91,11 @@ typedef struct s_game
     int DEBUG;
     int live;
     char **map;
-    void		*textures[5];
-    char		*tex_data[5];
-    int					tex_bpp[5];
-	int					tex_sl[5];
-	int    				tex_end[5];
+    void		*textures[14];
+    char		*tex_data[14];
+    int					tex_bpp[14];
+	int					tex_sl[14];
+	int    				tex_end[14];
     int			tex_width;
 	int			tex_height;
     int         block;
@@ -109,6 +109,10 @@ typedef struct s_game
     int					end;
     int                 hit_type;
     int                 open;
+
+    int                 coin;
+    int                 coins;
+
     t_player    player;
     t_pages page;
 }   t_game;
@@ -160,5 +164,9 @@ int	count_words(char *str);
 float distance(float x, float y);
 float fixed_dist(float y1, float y2, t_game *game);
 void	render_texture_column(t_game *game, int texture_index, int column, int start_y, int end, int tex_x);
+
+int count_coins(char **map);
+void	youwin(void);
+int mouse_move(t_game *game);
 
 #endif

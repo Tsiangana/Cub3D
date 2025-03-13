@@ -91,6 +91,10 @@ typedef struct s_game
 	float				heightt;
     int					start_y;
     int					end;
+    int	texture_index;
+    int color;
+    int size;
+    int column;
     /*Cell*/
     t_player    player;
 }   t_game;
@@ -101,7 +105,7 @@ typedef struct s_bytes
 }   t_bytes;
 
 void    put_pixel(int x, int y, int color, t_game *game);
-void    draw_square(int x, int y, int size, int color, t_game *game);
+void    draw_square(int x, int y, int size, t_game *game);
 void    draw_map(t_game *game);
 void    clear_image(t_game *game);
 void    init_player(t_player *player, t_game *game);
@@ -109,7 +113,7 @@ void    draw_line_with_texture(t_player *player, t_game *game, float angle, int 
 void    show_grid(t_game *game, char value, int color);
 void    move_player(t_player *player, t_game *game);
 void    draw_line(t_player *player, t_game *game, float angle, int i);
-void    show_square(int x, int y, int size, int color, t_game *game);
+void    show_square(int x, int y, int color, t_game *game);
 void	free_split(char **matriz);
 void	open_get_size(char *mapa, t_game *game);
 void	fill_matriz(char **matriz, char *s);
@@ -123,7 +127,7 @@ char	**alocate_matriz(int word);
 char	*alocate_word(char *start, int len);
 char	*alocate_space(char *content, char *buffer);
 bool    touch(float px, float py, t_game *game);
-int CloseWindow(t_game *game);
+int closewindow(t_game *game);
 int draw_loop(t_game *game);
 int key_press(int keycode, t_game *game);
 int key_release(int keycode, t_player *player);
@@ -133,7 +137,7 @@ float distance(float x, float y);
 float fixed_dist(float y1, float y2, t_game *game);
 
 /*Cell*/
-void	render_texture_column(t_game *game, int texture_index, int column, int start_y, int end, int tex_x);
+void	render_texture_column(t_game *game, int start_y, int end, int tex_x);
 /*Cell*/
 
 

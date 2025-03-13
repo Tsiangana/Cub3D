@@ -12,7 +12,7 @@
 
 #include "../includes/game.h"
 
-void load_textures(t_game *game)
+void	load_textures(t_game *game)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ void load_textures(t_game *game)
 		if (!game->textures[i])
 		{
 			printf("error: ao carregar textura %d\n", i);
-			CloseWindow(game);
+			closewindow(game);
 		}
 		game->tex_data[i] = mlx_get_data_addr(game->textures[i],
 				&game->tex_bpp[i], &game->tex_sl[i], &game->tex_end[i]);
@@ -39,16 +39,16 @@ void load_textures(t_game *game)
 	game->block = game->tex_height;
 }
 
-void	render_texture_column(t_game *game, int texture_index, int column, int start_y, int end, int tex_x)
+void	render_texture_column(t_game *game, int start_y, int end, int tex_x)
 {
+	char	*data;
 	int		y;
 	int		bpp;
 	int		sl;
-	char	*data;
 
-	bpp = game->tex_bpp[texture_index];
-	sl = game->tex_sl[texture_index];
-	data = game->tex_data[texture_index];
+	bpp = game->tex_bpp[game->texture_index];
+	sl = game->tex_sl[game->texture_index];
+	data = game->tex_data[game->texture_index];
 	y = start_y;
 	while (y < end)
 	{
@@ -58,8 +58,7 @@ void	render_texture_column(t_game *game, int texture_index, int column, int star
 		game->pix_color = *(int *)(data + (game->tex_y
 					* sl + tex_x * (bpp / 8)));
 		game->pix_color = mlx_get_color_value(game->mlx, game->pix_color);
-		put_pixel(column, y, game->pix_color, game);
+		put_pixel(game->column, y, game->pix_color, game);
 		y++;
 	}
 }
-

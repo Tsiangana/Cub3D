@@ -95,6 +95,12 @@ typedef struct s_game
     int color;
     int size;
     int column;
+    float	cos_angle;
+	float	sin_angle;
+	float	angle_speed;
+	float	new_x;
+	float	new_y;
+	int		speed;
     /*Cell*/
     t_player    player;
 }   t_game;
@@ -119,6 +125,7 @@ void	open_get_size(char *mapa, t_game *game);
 void	fill_matriz(char **matriz, char *s);
 void    responsivo(t_game *game);
 void    draw_background(t_game *game);
+void	init_player_pos(t_player *player, t_game *game);
 void    load_textures(t_game *game);
 char	*get_nextline(char *str, t_bytes *bit);
 char    **get_map(char *str);

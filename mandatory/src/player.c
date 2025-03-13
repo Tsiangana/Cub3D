@@ -27,7 +27,7 @@ static void	aux_init_player(t_player *player, t_game *game, int y, int x)
 	game->map[y][x] = '0';
 }
 
-static void	init_player_pos(t_player *player, t_game *game)
+void	init_player_pos(t_player *player, t_game *game)
 {
 	char	c;
 	int		y;
@@ -54,101 +54,51 @@ static void	init_player_pos(t_player *player, t_game *game)
 	player->angle = PI / 2;
 }
 
-void	init_player(t_player *player, t_game *game)
+static void	aux_move_player(t_player *player, t_game *game)
 {
-	init_player_pos(player, game);
-	player->key_up = false;
-	player->key_down = false;
-	player->key_right = false;
-	player->key_left = false;
-	player->left_rotate = false;
-	player->right_rotate = false;
-}
-
-int	key_press(int keycode, t_game *game)
-{
-	if (keycode == W)
-		game->player.key_up = true;
-	if (keycode == S)
-		game->player.key_down = true;
-	if (keycode == A)
-		game->player.key_left = true;
-	if (keycode == D)
-		game->player.key_right = true;
-	if (keycode == LEFT)
-		game->player.left_rotate = true;
-	if (keycode == RIGHT)
-		game->player.right_rotate = true;
-	if (keycode == CLOSE || keycode == CLOSEBTN)
-		closewindow(game);
-	return (0);
-}
-
-int	key_release(int keycode, t_player *player)
-{
-	if (keycode == W)
-		player->key_up = false;
-	if (keycode == S)
-		player->key_down = false;
-	if (keycode == A)
-		player->key_left = false;
-	if (keycode == D)
-		player->key_right = false;
-	if (keycode == LEFT)
-		player->left_rotate = false;
-	if (keycode == RIGHT)
-		player->right_rotate = false;
-	return (0);
+	if (player->key_up)
+	{
+		game->new_x += game->cos_angle * game->speed;
+		game->new_y += game->sin_angle * game->speed;
+	}
+	if (player->key_down)
+	{
+		game->new_x -= game->cos_angle * game->speed;
+		game->new_y -= game->sin_angle * game->speed;
+	}
+	if (player->key_left)
+	{
+		game->new_x += game->sin_angle * game->speed;
+		game->new_y -= game->cos_angle * game->speed;
+	}
+	if (player->key_right)
+	{
+		game->new_x -= game->sin_angle * game->speed;
+		game->new_y += game->cos_angle * game->speed;
+	}
 }
 
 void	move_player(t_player *player, t_game *game)
 {
-	float	cos_angle;
-	float	sin_angle;
-	float	angle_speed;
-	float	new_x;
-	float	new_y;
-	int		speed;
-
-	speed = (int)(game->block / 18);
-	angle_speed = 0.03;
-	cos_angle = cos(player->angle);
-	sin_angle = sin(player->angle);
-
+	game->speed = (int)(game->block / 18);
+	game->angle_speed = 0.03;
+	game->cos_angle = cos(player->angle);
+	game->sin_angle = sin(player->angle);
 	if (player->left_rotate)
-		player->angle -= angle_speed;
+		player->angle -= game->angle_speed;
 	if (player->right_rotate)
-		player->angle += angle_speed;
-
+		player->angle += game->angle_speed;
 	if (player->angle > 2 * PI)
 		player->angle = 0;
 	if (player->angle < 0)
 		player->angle = 2 * PI;
-	new_x = player->x;
-	new_y = player->y;
-	if (player->key_up)
-	{
-		new_x += cos_angle * speed;
-		new_y += sin_angle * speed;
-	}
-	if (player->key_down)
-	{
-		new_x -= cos_angle * speed;
-		new_y -= sin_angle * speed;
-	}
-	if (player->key_left)
-	{
-		new_x += sin_angle * speed;
-		new_y -= cos_angle * speed;
-	}
-	if (player->key_right)
-	{
-		new_x -= sin_angle * speed;
-		new_y += cos_angle * speed;
-	}
-
-	if (!touch(new_x + MARGIN, player->y, game) && !touch(new_x - MARGIN, player->y, game))
-		player->x = new_x;
-	if (!touch(player->x, new_y + MARGIN, game) && !touch(player->x, new_y - MARGIN, game))
-		player->y = new_y;
+	game->new_x = player->x;
+	game->new_y = player->y;
+	aux_move_player(player, game);
+	if (!touch(game->new_x + MARGIN, player->y, game)
+		&& !touch(game->new_x - MARGIN, player->y, game))
+		player->x = game->new_x;
+	if (!touch(player->x, game->new_y + MARGIN, game)
+		&& !touch(player->x, game->new_y - MARGIN, game))
+		player->y = game->new_y;
 }

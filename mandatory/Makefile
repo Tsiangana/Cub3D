@@ -20,6 +20,7 @@ SRC = src/main.c\
 		src/player.c\
 		src/draw_line_map.c\
 		src/draw_map.c\
+		src/init_player_pos.c\
 		src/grid_2d.c\
 		src/screens.c\
 		src/close.c\

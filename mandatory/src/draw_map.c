@@ -105,7 +105,7 @@ int	draw_loop(t_game *game)
 	}
 	start_x = player->angle - PI / 6;
 	fraction = PI / 3 / game->WIDTH;
-	i = 0;
+	i = -1;
 	while (i++ < game->WIDTH)
 	{
 		draw_line(player, game, start_x, i);

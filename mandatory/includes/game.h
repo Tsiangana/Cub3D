@@ -94,11 +94,11 @@ typedef struct s_game
 	int			bpp;
 	int			size_line;
 	int			endian;
-	int			HEIGHT;
-	int			WIDTH;
+	int			heightyy;
+	int			widthyy;
 	int			height;
 	int			width;
-	int			DEBUG;
+	int			debug;
 }	t_game;
 
 typedef struct s_bytes

@@ -62,8 +62,8 @@ static void	aux_draw_line(t_player *player, t_game *game)
 	game->x1 = player->x;
 	game->x2 = player->ray_x;
 	game->dist = fixed_dist(player->y, player->ray_y, game);
-	game->heightt = (game->block / game->dist) * (game->WIDTH / 2);
-	game->start_y = (game->HEIGHT - game->heightt) / 2;
+	game->heightt = (game->block / game->dist) * (game->widthyy / 2);
+	game->start_y = (game->heightyy - game->heightt) / 2;
 	game->end = game->start_y + game->heightt;
 }
 
@@ -78,12 +78,12 @@ void	draw_line(t_player *player, t_game *game, float start_x, int i)
 	game->column = i;
 	while (!touch(player->ray_x, player->ray_y, game))
 	{
-		if (game->DEBUG)
+		if (game->debug)
 			put_pixel(player->ray_x, player->ray_y, 0xFF0000, game);
 		player->ray_x += player->cos_angle;
 		player->ray_y += player->sin_angle;
 	}
-	if (!game->DEBUG)
+	if (!game->debug)
 	{
 		aux_draw_line(player, game);
 		if (touch(player->ray_x - player->cos_angle, player->ray_y, game))

@@ -16,7 +16,7 @@ void	put_pixel(int x, int y, int color, t_game *game)
 {
 	int	index;
 
-	if (x >= game->WIDTH || y >= game->HEIGHT || x < 0 || y < 0)
+	if (x >= game->widthyy || y >= game->heightyy || x < 0 || y < 0)
 		return ;
 	index = y * game->size_line + x * game->bpp / 8;
 	game->data[index] = color & 0xFF;
@@ -74,10 +74,10 @@ void	clear_image(t_game *game)
 	int	x;
 
 	y = 0;
-	while (y < game->HEIGHT)
+	while (y < game->heightyy)
 	{
 		x = 0;
-		while (x < game->WIDTH)
+		while (x < game->widthyy)
 		{
 			put_pixel(x, y, 0, game);
 			x++;
@@ -98,15 +98,15 @@ int	draw_loop(t_game *game)
 	clear_image(game);
 	draw_background(game);
 	game->color = 0x00FF00;
-	if (game->DEBUG)
+	if (game->debug)
 	{
 		draw_square(player->x, player->y, 10, game);
 		draw_map(game);
 	}
 	start_x = player->angle - PI / 6;
-	fraction = PI / 3 / game->WIDTH;
+	fraction = PI / 3 / game->widthyy;
 	i = -1;
-	while (i++ < game->WIDTH)
+	while (i++ < game->widthyy)
 	{
 		draw_line(player, game, start_x, i);
 		start_x += fraction;

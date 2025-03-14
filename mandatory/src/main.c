@@ -22,17 +22,18 @@ static void	init_images(t_game *game)
 
 void	init_game(t_game *game, char *str)
 {
-	game->DEBUG = 0;
+	game->debug = 0;
 	game->map = get_map(str);
 	open_get_size(str, game);
 	responsivo(game);
 	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, game->WIDTH, game->HEIGHT, "Game");
+	game->win = mlx_new_window(game->mlx, game->widthyy,
+			game->heightyy, "Game");
 	init_images(game);
 	load_textures(game);
 	mlx_hook(game->win, 17, 0, closewindow, game);
 	init_player(&game->player, game);
-	game->img = mlx_new_image(game->mlx, game->WIDTH, game->HEIGHT);
+	game->img = mlx_new_image(game->mlx, game->widthyy, game->heightyy);
 	game->data = mlx_get_data_addr(game->img, &game->bpp,
 			&game->size_line, &game->endian);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);

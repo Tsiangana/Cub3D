@@ -12,36 +12,56 @@
 
 #include "../../includes/game.h"
 
-static void	init_coins(t_game *game)
+static void	init_images(t_game *game)
 {
-	game->textures[5] = mlx_xpm_file_to_image(game->mlxs[0], "assets/coin/coin1.xpm", &game->tex_width, &game->tex_height);
-	game->textures[6] = mlx_xpm_file_to_image(game->mlxs[0], "assets/coin/coin2.xpm", &game->tex_width, &game->tex_height);
-	game->textures[7] = mlx_xpm_file_to_image(game->mlxs[0], "assets/coin/coin3.xpm", &game->tex_width, &game->tex_height);
-	game->textures[8] = mlx_xpm_file_to_image(game->mlxs[0], "assets/coin/coin4.xpm", &game->tex_width, &game->tex_height);
-	game->textures[9] = mlx_xpm_file_to_image(game->mlxs[0], "assets/coin/coin5.xpm", &game->tex_width, &game->tex_height);
-	game->textures[10] = mlx_xpm_file_to_image(game->mlxs[0], "assets/coin/coin6.xpm", &game->tex_width, &game->tex_height);
-	game->textures[11] = mlx_xpm_file_to_image(game->mlxs[0], "assets/coin/coin7.xpm", &game->tex_width, &game->tex_height);
-	game->textures[12] = mlx_xpm_file_to_image(game->mlxs[0], "assets/coin/coin8.xpm", &game->tex_width, &game->tex_height);
-	game->textures[13] = mlx_xpm_file_to_image(game->mlxs[0], "assets/coin/coin9.xpm", &game->tex_width, &game->tex_height);
+	game->textures[2] = mlx_xpm_file_to_image(game->mlxs[0],
+			"assets/levels/level1/wall01.xpm",
+			&game->tex_width, &game->tex_height);
+	game->textures[3] = mlx_xpm_file_to_image(game->mlxs[0],
+			"assets/levels/level1/wall01.xpm",
+			&game->tex_width, &game->tex_height);
+	game->textures[4] = mlx_xpm_file_to_image(game->mlxs[0],
+			"assets/levels/level1/door.xpm",
+			&game->tex_width, &game->tex_height);
+	game->textures[0] = mlx_xpm_file_to_image(game->mlxs[0],
+			"assets/levels/level1/wall01.xpm", &game->tex_width,
+			&game->tex_height);
+	game->textures[1] = mlx_xpm_file_to_image(game->mlxs[0],
+			"assets/levels/level1/wall01.xpm",
+			&game->tex_width, &game->tex_height);
 }
 
-void load_textures(t_game *game)
+static void	init_coins(t_game *game)
 {
-	int i;
+	game->textures[5] = mlx_xpm_file_to_image(game->mlxs[0],
+			"assets/coin/coin1.xpm", &game->tex_width, &game->tex_height);
+	game->textures[6] = mlx_xpm_file_to_image(game->mlxs[0],
+			"assets/coin/coin2.xpm", &game->tex_width, &game->tex_height);
+	game->textures[7] = mlx_xpm_file_to_image(game->mlxs[0],
+			"assets/coin/coin3.xpm", &game->tex_width, &game->tex_height);
+	game->textures[8] = mlx_xpm_file_to_image(game->mlxs[0],
+			"assets/coin/coin4.xpm", &game->tex_width, &game->tex_height);
+	game->textures[9] = mlx_xpm_file_to_image(game->mlxs[0],
+			"assets/coin/coin5.xpm", &game->tex_width, &game->tex_height);
+	game->textures[10] = mlx_xpm_file_to_image(game->mlxs[0],
+			"assets/coin/coin6.xpm", &game->tex_width, &game->tex_height);
+	game->textures[11] = mlx_xpm_file_to_image(game->mlxs[0],
+			"assets/coin/coin7.xpm", &game->tex_width, &game->tex_height);
+	game->textures[12] = mlx_xpm_file_to_image(game->mlxs[0],
+			"assets/coin/coin8.xpm", &game->tex_width, &game->tex_height);
+	game->textures[13] = mlx_xpm_file_to_image(game->mlxs[0],
+			"assets/coin/coin9.xpm", &game->tex_width, &game->tex_height);
+}
+
+void	load_textures(t_game *game)
+{
+	int	i;
 
 	i = 0;
-	game->textures[0] = mlx_xpm_file_to_image(game->mlxs[0], "assets/levels/level1/wall01.xpm",
-		&game->tex_width, &game->tex_height);
-	game->textures[1] = mlx_xpm_file_to_image(game->mlxs[0], "assets/levels/level1/wall01.xpm",
-		&game->tex_width, &game->tex_height);
-	game->textures[2] = mlx_xpm_file_to_image(game->mlxs[0], "assets/levels/level1/wall01.xpm",
-		&game->tex_width, &game->tex_height);
-	game->textures[3] = mlx_xpm_file_to_image(game->mlxs[0], "assets/levels/level1/wall01.xpm",
-		&game->tex_width, &game->tex_height);
-	game->textures[4] = mlx_xpm_file_to_image(game->mlxs[0], "assets/levels/level1/door.xpm",
-		&game->tex_width, &game->tex_height);
+	init_images(game);
 	init_coins(game);
-	game->page.life = mlx_xpm_file_to_image(game->mlxs[0], "assets/life.xpm", &game->page.life_w, &game->page.life_h);
+	game->page.life = mlx_xpm_file_to_image(game->mlxs[0],
+			"assets/life.xpm", &game->page.life_w, &game->page.life_h);
 	while (i < 14)
 	{
 		if (!game->textures[i] || !game->page.life)
@@ -56,23 +76,25 @@ void load_textures(t_game *game)
 	game->block = game->tex_height;
 }
 
-void render_texture_column(t_game *game, int texture_index, int column, int start_y, int end, int tex_x)
+void	render_texture_column(t_game *game, \
+	int column, int start_y, int end)
 {
-	int y;
-	int bpp;
-	int sl;
-	char *data;
+	char	*data;
+	int		y;
+	int		bpp;
+	int		sl;
 
-	bpp = game->tex_bpp[texture_index];
-	sl = game->tex_sl[texture_index];
-	data = game->tex_data[texture_index];
+	bpp = game->tex_bpp[game->texture_index];
+	sl = game->tex_sl[game->texture_index];
+	data = game->tex_data[game->texture_index];
 	y = start_y;
 	while (y < end)
 	{
 		game->tex_y = ((y - start_y) * game->tex_height) / (end - start_y);
 		if (game->tex_y >= game->tex_height)
 			game->tex_y = game->tex_height - 1;
-		game->pix_color = *(int *)(data + (game->tex_y * sl + tex_x * (bpp / 8)));
+		game->pix_color = *(int *)(data + (game->tex_y * sl + game->tex_x
+					* (bpp / 8)));
 		game->pix_color = mlx_get_color_value(game->mlxs[0], game->pix_color);
 		put_pixel(column, y, game->pix_color, game);
 		y++;

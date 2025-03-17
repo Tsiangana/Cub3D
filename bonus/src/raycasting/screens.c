@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../includes/game.h"
 
-void    responsivo(t_game *game)
+void	responsivo(t_game *game)
 {
-    if (game->DEBUG == 0)
-    {
-        game->HEIGHT = 1080;
-        game->WIDTH = 1920;
-    }
+	if (game->DEBUG == 0)
+	{
+		game->HEIGHT = 1080;
+		game->WIDTH = 1920;
+	}
 }

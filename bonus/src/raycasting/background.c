@@ -1,35 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aux.c                                              :+:      :+:    :+:   */
+/*   background.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pzau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 13:11:23 by pzau              #+#    #+#             */
-/*   Updated: 2025/03/12 13:11:25 by pzau             ###   ########.fr       */
+/*   Created: 2025/03/17 10:50:30 by pzau              #+#    #+#             */
+/*   Updated: 2025/03/17 10:50:31 by pzau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/game.h"
 
-int	count_coins(char **map)
+void	clear_image(t_game *game)
 {
 	int	y;
 	int	x;
-	int	c;
 
 	y = 0;
-	c = 0;
-	while (map[y] != NULL)
+	while (y < game->HEIGHT)
 	{
 		x = 0;
-		while (map[y][x] != '\0')
+		while (x < game->WIDTH)
 		{
-			if (map[y][x] == 'C')
-				c++;
+			put_pixel(x, y, 0, game);
 			x++;
 		}
 		y++;
 	}
-	return (c);
+}
+
+void	draw_background(t_game *game)
+{
+	int	sky_color;
+	int	floor_color;
+	int	y;
+	int	x;
+
+	sky_color = 0x000000;
+	floor_color = 0x000000;
+	y = 0;
+	while (y < game->HEIGHT / 2)
+	{
+		x = 0;
+		while (x < game->WIDTH)
+		{
+			put_pixel(x, y, sky_color, game);
+			put_pixel(x, game->HEIGHT - y - 1, floor_color, game);
+			x++;
+		}
+		y++;
+	}
 }

@@ -12,17 +12,16 @@
 
 #include "../includes/game.h"
 
-int main(void)
+int	main(void)
 {
-    t_game game;
+	t_game	game;
 
-    game.mlxs[0] = mlx_init();
-    game.wins[0] = mlx_new_window(game.mlxs[0], 1000, 562, "Ori and the Blind Florest");
-    
-    start_page_one(&game, &game.page);
-    mlx_mouse_hook(game.wins[0], start_button, &game);
-    mlx_hook(game.wins[0], 17, 0, CloseWindow, &game);
-
-    mlx_loop(game.mlxs[0]);
-    return (0);
+	game.mlxs[0] = mlx_init();
+	game.wins[0] = mlx_new_window(game.mlxs[0], 1000, 562,
+			"Ori and the Blind Florest");
+	start_page_one(&game, &game.page);
+	mlx_mouse_hook(game.wins[0], start_button, &game);
+	mlx_hook(game.wins[0], 17, 0, CloseWindow, &game);
+	mlx_loop(game.mlxs[0]);
+	return (0);
 }

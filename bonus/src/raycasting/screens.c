@@ -14,9 +14,9 @@
 
 void	responsivo(t_game *game)
 {
-	if (game->DEBUG == 0)
+	if (game->debug == 0)
 	{
-		game->HEIGHT = 1080;
-		game->WIDTH = 1920;
+		game->heightty = 1080;
+		game->widthhy = 1920;
 	}
 }

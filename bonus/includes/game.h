@@ -112,11 +112,11 @@ typedef struct s_game
 	int			bpp;
 	int			size_line;
 	int			endian;
-	int			HEIGHT;
-	int			WIDTH;
+	int			heightty;
+	int			widthhy;
 	int			height;
 	int			width;
-	int			DEBUG;
+	int			debug;
 	int			live;
 	int			tex_bpp[14];
 	int			tex_sl[14];

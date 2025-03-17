@@ -16,7 +16,7 @@ void	put_pixel(int x, int y, int color, t_game *game)
 {
 	int	index;
 
-	if (x >= game->WIDTH || y >= game->HEIGHT || x < 0 || y < 0)
+	if (x >= game->widthhy || y >= game->heightty || x < 0 || y < 0)
 		return ;
 	index = y * game->size_line + x * game->bpp / 8;
 	game->data[index] = color & 0xFF;
@@ -75,7 +75,7 @@ static	void	aux_draw_loop(t_game *game, t_player *player)
 	move_player(player, game);
 	clear_image(game);
 	draw_background(game);
-	if (game->DEBUG)
+	if (game->debug)
 	{
 		draw_square(player->x, player->y, 10, game);
 		draw_map(game);
@@ -92,9 +92,9 @@ int	draw_loop(t_game *game)
 	player = &game->player;
 	aux_draw_loop(game, player);
 	start_x = player->angle - PI / 6;
-	fraction = PI / 3 / game->WIDTH;
+	fraction = PI / 3 / game->widthhy;
 	i = 0;
-	while (i < game->WIDTH)
+	while (i < game->widthhy)
 	{
 		draw_line(player, game, start_x, i);
 		start_x += fraction;

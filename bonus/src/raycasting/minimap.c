@@ -18,7 +18,7 @@ static void	init_minimap(t_game *game)
 	game->minimap.minimap_size = 6;
 	game->minimap.player_map_x = game->player.x / game->block;
 	game->minimap.player_map_y = game->player.y / game->block;
-	game->minimap.minimap_x = game->WIDTH - (game->minimap.minimap_size
+	game->minimap.minimap_x = game->widthhy - (game->minimap.minimap_size
 			* game->minimap.block_size) - 20;
 	game->minimap.minimap_y = 20;
 	game->minimap.x = 0;

@@ -77,7 +77,7 @@ static void	init_draw_line(t_player *player, t_game *game, float start_x)
 	player->ray_y = player->y;
 	while (!touch(player->ray_x, player->ray_y, game))
 	{
-		if (game->DEBUG)
+		if (game->debug)
 			put_pixel(player->ray_x, player->ray_y, 0xFF0000, game);
 		player->ray_x += player->cos_angle;
 		player->ray_y += player->sin_angle;
@@ -89,8 +89,8 @@ static void	end_draw_line(t_player *player, t_game *game, int i)
 	game->x1 = player->x;
 	game->x2 = player->ray_x;
 	game->dist = fixed_dist(player->y, player->ray_y, game);
-	game->heightt = (game->block / game->dist) * (game->WIDTH / 2);
-	game->start_y = (game->HEIGHT - game->heightt) / 2;
+	game->heightt = (game->block / game->dist) * (game->widthhy / 2);
+	game->start_y = (game->heightty - game->heightt) / 2;
 	game->end = game->start_y + game->heightt;
 	if (touch(player->ray_x - player->cos_angle, player->ray_y, game))
 		game->tex_x = (int)player->ray_x % game->tex_width;

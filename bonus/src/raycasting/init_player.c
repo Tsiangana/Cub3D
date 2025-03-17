@@ -49,8 +49,8 @@ void	init_player_pos(t_player *player, t_game *game)
 		}
 		y++;
 	}
-	player->x = game->WIDTH / 2;
-	player->y = game->HEIGHT / 2;
+	player->x = game->widthhy / 2;
+	player->y = game->heightty / 2;
 	player->angle = PI / 2;
 }
 

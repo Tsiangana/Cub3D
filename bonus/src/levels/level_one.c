@@ -63,19 +63,19 @@ int	mouse_move(t_game *game)
 
 void	init_game(t_game *game, char *str)
 {
-	game->DEBUG = 0;
+	game->debug = 0;
 	game->open = 0;
 	game->coin = 0;
 	game->map = get_map(str);
 	open_get_size(str, game);
 	game->coins = count_coins(game->map);
 	responsivo(game);
-	game->wins[3] = mlx_new_window(game->mlxs[0], game->WIDTH,
-			game->HEIGHT, "Ori - Level one");
+	game->wins[3] = mlx_new_window(game->mlxs[0], game->widthhy,
+			game->heightty, "Ori - Level one");
 	load_textures(game);
 	mlx_hook(game->wins[3], 17, 0, CloseLevelOne, game);
 	init_player(&game->player, game);
-	game->img = mlx_new_image(game->mlxs[0], game->WIDTH, game->HEIGHT);
+	game->img = mlx_new_image(game->mlxs[0], game->widthhy, game->heightty);
 	game->data = mlx_get_data_addr(game->img, &game->bpp,
 			&game->size_line, &game->endian);
 	mlx_put_image_to_window(game->mlxs[0], game->wins[3], game->img, 0, 0);

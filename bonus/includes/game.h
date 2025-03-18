@@ -13,7 +13,7 @@
 #ifndef GAME_H
 # define GAME_H
 
-# include "./mlx/mlx.h"
+# include "../../minilibx-linux/mlx.h"
 # include "../libx/libx.h"
 # include <stdio.h>
 # include <stdlib.h>

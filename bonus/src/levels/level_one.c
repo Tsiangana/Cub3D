@@ -83,7 +83,7 @@ void	init_game(t_game *game, char *str)
 
 void	level_one(t_game *game)
 {
-	init_game(game, "maps/level1/one.cub");
+	init_game(game, "../../maps/level1/one.cub");
 	mlx_hook(game->wins[3], 2, 1L << 0, key_press, game);
 	mlx_hook(game->wins[3], 3, 1L << 1, key_release, &game->player);
 	mlx_loop_hook(game->mlxs[0], mouse_move, game);

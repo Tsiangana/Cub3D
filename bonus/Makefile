@@ -14,8 +14,8 @@ NAME = cub3d
 CC = cc 
 OBJ = $(SRC:.c=.o)
 
-LFLAGS = -L./includes/mlx -lmlx -lXext -lX11 -lm -lz
-INCLUDES = includes/mlx/libmlx.a
+LFLAGS = -L./../minilibx-linux -lmlx -lXext -lX11 -lm -lz
+INCLUDES = ../minilibx-linux/libmlx.a
 SRC = src/main.c\
 		src/close.c\
 		src/mensages.c\
@@ -48,17 +48,17 @@ SRC = src/main.c\
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	make -C ./includes/mlx
+	make -C ../minilibx-linux
 	$(CC) $(SRC) -o $(NAME) $(INCLUDES) $(LFLAGS)
 
 fclean:
 	rm -rf $(OBJ)
 	rm -rf $(NAME)
-	make clean -C ./includes/mlx
+	make clean -C ../minilibx-linux
 
 clean:
 	rm -rf $(OBJ)
-	make clean -C ./includes/mlx
+	make clean -C ../minilibx-linux
 
 re: fclean all
 

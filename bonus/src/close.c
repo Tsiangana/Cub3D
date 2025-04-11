@@ -12,7 +12,7 @@
 
 #include "../includes/game.h"
 
-int	CloseWindow(t_game *game)
+int	closewindow(t_game *game)
 {
 	mlx_destroy_image(game->mlxs[0], game->page.page[0]);
 	mlx_destroy_image(game->mlxs[0], game->page.buttons[0]);
@@ -23,7 +23,7 @@ int	CloseWindow(t_game *game)
 	return (0);
 }
 
-int	Closet(t_game *game)
+int	closet(t_game *game)
 {
 	mlx_destroy_window(game->mlxs[0], game->wins[0]);
 	mlx_destroy_display(game->mlxs[0]);

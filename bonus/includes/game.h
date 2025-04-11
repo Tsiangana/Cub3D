@@ -182,7 +182,7 @@ float	distance(float x, float y);
 float	fixed_dist(float y1, float y2, t_game *game);
 bool	touch(float px, float py, t_game *game);
 bool	touch_aux(float px, float py, t_game *game);
-int		CloseWindow(t_game *game);
+int		closewindow(t_game *game);
 int		draw_loop(t_game *game);
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_player *player);
@@ -190,9 +190,9 @@ int		delimeter(char c);
 int		count_words(char *str);
 int		count_coins(char **map);
 int		mouse_move(t_game *game);
-int		CloseLevelOne(t_game *game);
+int		closelevelone(t_game *game);
 int		start_button(int button, int x, int y, t_game *game);
-int		CloseWindow(t_game *game);
-int		Closet(t_game *game);
+int		closewindow(t_game *game);
+int		closet(t_game *game);
 
 #endif

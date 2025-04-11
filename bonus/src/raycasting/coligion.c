@@ -19,7 +19,7 @@ static void	aux_one(t_game *game, float px, float py)
 	if (game->coins == 0)
 	{
 		youwin();
-		CloseLevelOne(game);
+		closelevelone(game);
 	}
 }
 

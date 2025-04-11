@@ -29,9 +29,19 @@ SRC = src/main.c\
 		src/get_map/get_nextline.c\
 		src/get_map/ft_split_aux.c\
 		src/get_map/ft_split.c\
-		libx/ft_strdup.c\
-		libx/ft_strcat.c\
-		libx/ft_strlen.c
+		src/config_map.c\
+		src/validations.c\
+		src/aux_validations.c\
+		src/init_main.c\
+		src/validate_texture_color.c\
+		src/validate_all.c\
+		src/get_map/aux_func1.c\
+		src/get_map/get_map.c\
+		src/get_map/ft_strjoin.c\
+		src/aux/ft_split_1.c\
+		src/aux/ft_memcpy.c\
+		src/aux/ft_strtrim.c\
+		src/aux/ft_strchr.c\
 
 all: $(NAME)
 

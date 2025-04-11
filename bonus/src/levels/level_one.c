@@ -12,7 +12,7 @@
 
 #include "../../includes/game.h"
 
-int	CloseLevelOne(t_game *game)
+int	closelevelone(t_game *game)
 {
 	int	i;
 	int	on;
@@ -73,7 +73,7 @@ void	init_game(t_game *game, char *str)
 	game->wins[3] = mlx_new_window(game->mlxs[0], game->widthhy,
 			game->heightty, "Ori - Level one");
 	load_textures(game);
-	mlx_hook(game->wins[3], 17, 0, CloseLevelOne, game);
+	mlx_hook(game->wins[3], 17, 0, closelevelone, game);
 	init_player(&game->player, game);
 	game->img = mlx_new_image(game->mlxs[0], game->widthhy, game->heightty);
 	game->data = mlx_get_data_addr(game->img, &game->bpp,
@@ -83,7 +83,7 @@ void	init_game(t_game *game, char *str)
 
 void	level_one(t_game *game)
 {
-	init_game(game, "../../maps/level1/one.cub");
+	init_game(game, "maps/level1/one.cub");
 	mlx_hook(game->wins[3], 2, 1L << 0, key_press, game);
 	mlx_hook(game->wins[3], 3, 1L << 1, key_release, &game->player);
 	mlx_loop_hook(game->mlxs[0], mouse_move, game);

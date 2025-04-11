@@ -21,7 +21,7 @@ int	main(void)
 			"Ori and the Blind Florest");
 	start_page_one(&game, &game.page);
 	mlx_mouse_hook(game.wins[0], start_button, &game);
-	mlx_hook(game.wins[0], 17, 0, CloseWindow, &game);
+	mlx_hook(game.wins[0], 17, 0, closewindow, &game);
 	mlx_loop(game.mlxs[0]);
 	return (0);
 }

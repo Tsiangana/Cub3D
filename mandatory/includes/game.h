@@ -20,6 +20,10 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include <math.h>
+# include <errno.h>
+# include <string.h>
+# include <unistd.h>
+# include <ctype.h>
 
 # define BLOCK 64
 # define W 119
@@ -34,6 +38,9 @@
 # define TWO 50
 # define CLOSE 65288
 # define CLOSEBTN 65307
+
+# define MAX_LINE_LENGTH 1024
+# define TAB_WIDTH 8
 
 # define MARGIN 8
 
@@ -57,6 +64,16 @@ typedef struct s_player
 	t_game	*game;
 }	t_player;
 
+typedef struct s_addtab
+{
+	int			y;
+	int			x;
+	char		*new_line;
+	int			tab_count;
+	int			new_len;
+	int			k;
+}				t_addtab;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -66,6 +83,13 @@ typedef struct s_game
 	char		*data;
 	char		**map;
 	char		*tex_data[4];
+	char		*no_texture;
+	char		*so_texture;
+	char		*we_texture;
+	char		*ea_texture;
+	char		*floor_color;
+	char		*ceiling_color;
+	char		**lines;
 	float		x1;
 	float		x2;
 	float		dist;
@@ -76,6 +100,7 @@ typedef struct s_game
 	float		new_x;
 	float		new_y;
 	t_player	player;
+	t_addtab	tab;
 	int			speed;
 	int			tex_bpp[4];
 	int			tex_sl[4];
@@ -98,6 +123,15 @@ typedef struct s_game
 	int			widthyy;
 	int			height;
 	int			width;
+	int			rows;
+	int			cols;
+	int			fd;
+	int			y;
+	int			x;
+	int			x_p;
+	int			y_p;
+	int			color_f;
+	int			color_c;
 	int			debug;
 }	t_game;
 
@@ -106,6 +140,20 @@ typedef struct s_bytes
 	int	total_bytess;
 }	t_bytes;
 
+void	Validate_characters(t_game *game);
+void	free_all(t_game *game);
+void	initialize_game(t_game *game);
+void	check_arguments(int ac, char **av, t_game *game);
+void	parse_line(t_game *game, char *line);
+void	validate_all(t_game *game);
+void	add_tab(t_game *game);
+void	aux_verifybreakline(char *str);
+void	parse_game(t_game *game, char **lines);
+void	verifybreakline(char *str);
+void	validate_walls(t_game *game);
+void	validate_zeros(t_game *game);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+void	aux_add_tab(t_game *game);
 void	put_pixel(int x, int y, int color, t_game *game);
 void	draw_square(int x, int y, int size, t_game *game);
 void	draw_map(t_game *game);
@@ -131,6 +179,16 @@ char	**ft_split(char *s);
 char	**alocate_matriz(int word);
 char	*alocate_word(char *start, int len);
 char	*alocate_space(char *content, char *buffer);
+char	*ft_strtrim(char const *s1, char const *set);
+char	**parse_map(char **lines, int start_index);
+char	*ft_strdup(char *str);
+char	*validate_wall(t_game *game);
+char	**ft_split_1(char const *s, char c);
+char	*ft_strjoin(char *s1, char *s2);
+char	*validate_zero(t_game *game);
+char	*ft_strcat(char *dest, char *str);
+char	**print_map(char *str);
+char	*ft_strchr(const char *s, int c);
 bool	touch(float px, float py, t_game *game);
 float	distance(float x, float y);
 float	fixed_dist(float y1, float y2, t_game *game);
@@ -140,5 +198,16 @@ int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_player *player);
 int		delimeter(char c);
 int		count_words(char *str);
+int		aux_verify_characters(int c);
+int		ft_strlen(char *str);
+int		verify_characters(t_game *game);
+int		strlen_map(t_game *game);
+int		ft_atoi(const char *nptr);
+int		verify_extension(char *str);
+int		is_valid_color(char *line);
+int		get_color(char *line);
+int		num_comma(char *line);
+int		check_number(char *str);
+int		verify_space(t_game *game);
 
 #endif

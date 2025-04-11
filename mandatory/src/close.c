@@ -19,7 +19,7 @@ int	closewindow(t_game *game)
 
 	i = 0;
 	on = 0;
-	free_split(game->map);
+	free_all(game);
 	while (i < 4)
 	{
 		if (game->textures[i])

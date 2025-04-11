@@ -32,7 +32,7 @@ void	start_page_one(t_game *game, t_pages *pages)
 	if (!pages->page[0] || !pages->buttons[0])
 	{
 		printf("Error ao carregar imagem\n");
-		Closet(game);
+		closet(game);
 	}
 	x_pos = (pages->width[0] - pages->w_button[0]) / 2;
 	y_pos = (pages->height[0] - pages->h_button[0]) / 1.2;

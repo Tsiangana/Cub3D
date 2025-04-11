@@ -12,13 +12,15 @@
 
 #include "../../includes/game.h"
 
-static void	draw_large_text(void *mlx, void *win, \
-	int x, int y, int color, char *text)
+static void	draw_large_text(int x, int y, int color, t_game *game)
 {
-	mlx_string_put(mlx, win, x, y, color, text);
-	mlx_string_put(mlx, win, x + 1, y, color, text);
-	mlx_string_put(mlx, win, x, y + 1, color, text);
-	mlx_string_put(mlx, win, x + 1, y + 1, color, text);
+	char	*text;
+
+	text = "Precione ENTER para iniciar";
+	mlx_string_put(game->mlxs[0], game->wins[2], x, y, color, text);
+	mlx_string_put(game->mlxs[0], game->wins[2], x + 1, y, color, text);
+	mlx_string_put(game->mlxs[0], game->wins[2], x, y + 1, color, text);
+	mlx_string_put(game->mlxs[0], game->wins[2], x + 1, y + 1, color, text);
 }
 
 void	put_letters(t_game *game)
@@ -35,6 +37,5 @@ void	put_letters(t_game *game)
 		"Boa sorte e divirta-se");
 	mlx_string_put(game->mlxs[0], game->wins[2], 600, 200, 0xFFFFFF,
 		"Bem-vindos ao Jogo do Amazing team");
-	draw_large_text(game->mlxs[0], game->wins[2], 600, 400, 0xFFFFFF,
-		"Precione ENTER para iniciar");
+	draw_large_text(600, 400, 0xFFFFFF, game);
 }

@@ -84,7 +84,7 @@ int	key_press(int keycode, t_game *game)
 	if (keycode == RIGHT)
 		game->player.right_rotate = true;
 	if (keycode == CLOSE || keycode == CLOSEBTN)
-		CloseLevelOne(game);
+		closelevelone(game);
 	return (0);
 }
 

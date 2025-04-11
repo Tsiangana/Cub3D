@@ -23,7 +23,6 @@ static void	init_images(t_game *game)
 void	init_game(t_game *game, char *str)
 {
 	game->debug = 0;
-	game->map = get_map(str);
 	open_get_size(str, game);
 	responsivo(game);
 	game->mlx = mlx_init();
@@ -45,6 +44,11 @@ int	main(int ac, char **av)
 
 	if (ac == 2)
 	{
+		check_arguments(ac, av, &game);
+		initialize_game(&game);
+		game.lines = print_map(av[1]);
+		parse_game(&game, game.lines);
+		validate_all(&game);
 		init_game(&game, av[1]);
 		mlx_hook(game.win, 2, 1L << 0, key_press, &game);
 		mlx_hook(game.win, 3, 1L << 1, key_release, &game.player);

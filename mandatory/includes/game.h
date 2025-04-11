@@ -68,6 +68,7 @@ typedef struct s_addtab
 {
 	int			y;
 	int			x;
+	int			j;
 	char		*new_line;
 	int			tab_count;
 	int			new_len;

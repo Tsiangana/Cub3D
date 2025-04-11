@@ -15,10 +15,9 @@
 void	add_tab(t_game *game)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
+	game->tab.j = 0;
 	while (game->map[game->tab.y] != NULL)
 	{
 		game->tab.tab_count = 0;
@@ -34,7 +33,7 @@ void	add_tab(t_game *game)
 		if (!game->tab.new_line)
 			return ;
 		aux_add_tab(game);
-		game->tab.new_line[j] = '\0';
+		game->tab.new_line[game->tab.j] = '\0';
 		free(game->map[game->tab.y]);
 		game->map[game->tab.y] = game->tab.new_line;
 		game->tab.y++;

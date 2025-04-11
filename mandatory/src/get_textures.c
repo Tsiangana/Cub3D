@@ -17,13 +17,13 @@ void	load_textures(t_game *game)
 	int	i;
 
 	i = 0;
-	game->textures[0] = mlx_xpm_file_to_image(game->mlx, "textures/test.xpm",
+	game->textures[0] = mlx_xpm_file_to_image(game->mlx, game->no_texture,
 			&game->tex_width, &game->tex_height);
-	game->textures[1] = mlx_xpm_file_to_image(game->mlx, "textures/test.xpm",
+	game->textures[1] = mlx_xpm_file_to_image(game->mlx, game->so_texture,
 			&game->tex_width, &game->tex_height);
-	game->textures[2] = mlx_xpm_file_to_image(game->mlx, "textures/test.xpm",
+	game->textures[2] = mlx_xpm_file_to_image(game->mlx, game->we_texture,
 			&game->tex_width, &game->tex_height);
-	game->textures[3] = mlx_xpm_file_to_image(game->mlx, "textures/test.xpm",
+	game->textures[3] = mlx_xpm_file_to_image(game->mlx, game->ea_texture,
 			&game->tex_width, &game->tex_height);
 	while (i < 4)
 	{

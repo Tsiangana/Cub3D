@@ -30,6 +30,20 @@ void	responsivo(t_game *game)
 		printf("error\nmap too big to open in 2d mode\n");
 }
 
+static int	rgb_to_hex(char *rgb_str)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	if (sscanf(rgb_str, "%d,%d,%d", &r, &g, &b) != 3)
+	{
+		printf("Erro: Mapa invalido\n");
+		return (0);
+	}
+	return ((r << 16) | (g << 8) | b);
+}
+
 void	draw_background(t_game *game)
 {
 	int	sky_color;
@@ -37,8 +51,8 @@ void	draw_background(t_game *game)
 	int	y;
 	int	x;
 
-	sky_color = 0x87CEEB;
-	floor_color = 0x8B4513;
+	sky_color = rgb_to_hex(game->floor_color);
+	floor_color = rgb_to_hex(game->ceiling_color);
 	y = 0;
 	while (y < game->heightyy / 2)
 	{

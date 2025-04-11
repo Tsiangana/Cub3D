@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_aux.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctuiango <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lmachado <lmachado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/16 10:12:24 by ctuiango          #+#    #+#             */
-/*   Updated: 2024/09/16 10:12:31 by ctuiango         ###   ########.fr       */
+/*   Created: 2024/09/16 10:12:24 by pzau              #+#    #+#             */
+/*   Updated: 2025/04/10 14:25:17 by lmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	delimeter(char c)
 {
-	return (c == ' ' || c == '\t' || c == '\n');
+	return (c == '\n');
 }
 
 int	count_words(char *str)

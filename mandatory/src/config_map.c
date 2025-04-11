@@ -56,7 +56,7 @@ void	parse_game(t_game *game, char **lines)
 		if (is_map_line(lines[i]))
 		{
 			game->map = realloc(game->map, sizeof(char *) * (qtd_lines + 2));
-			game->map[qtd_lines++] = strdup(lines[i]);
+			game->map[qtd_lines++] = ft_strdup(lines[i]);
 			game->map[qtd_lines] = NULL;
 		}
 		else

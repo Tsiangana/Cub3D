@@ -78,10 +78,9 @@ int	verify_space(t_game *game)
 void	aux_add_tab(t_game *game)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
+	game->tab.j = 0;
 	while (game->map[game->tab.y][i])
 	{
 		if (game->map[game->tab.y][i] == '\t')
@@ -89,12 +88,12 @@ void	aux_add_tab(t_game *game)
 			game->tab.k = 0;
 			while (game->tab.k < TAB_WIDTH)
 			{
-				game->tab.new_line[j++] = ' ';
+				game->tab.new_line[game->tab.j++] = ' ';
 				game->tab.k++;
 			}
 		}
 		else
-			game->tab.new_line[j++] = game->map[game->tab.y][i];
+			game->tab.new_line[game->tab.j++] = game->map[game->tab.y][i];
 		i++;
 	}
 }

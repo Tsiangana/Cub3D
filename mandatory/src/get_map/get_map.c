@@ -5,12 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmachado <lmachado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 13:36:23 by ctuiango          #+#    #+#             */
+/*   Created: 2024/09/13 13:36:23 by pzau              #+#    #+#             */
 /*   Updated: 2025/04/10 14:26:13 by lmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/game.h"
+
+char	*alocate_space(char *content, char *buffer)
+{
+	char	*new_var;
+	char	*temp;
+
+	temp = content;
+	if (content == NULL)
+		new_var = ft_strdup(buffer);
+	else
+		new_var = ft_strcat(ft_strdup(content), buffer);
+	if (temp)
+		free(temp);
+	return (new_var);
+}
 
 void	verify_empty_map(char *str)
 {

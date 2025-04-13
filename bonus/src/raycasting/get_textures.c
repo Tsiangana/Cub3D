@@ -66,7 +66,7 @@ void	load_textures(t_game *game)
 	{
 		if (!game->textures[i] || !game->page.life)
 		{
-			printf("error: ao carregar textura \n");
+			printf("Error: ao carregar textura \n");
 			closelevelone(game);
 		}
 		game->tex_data[i] = mlx_get_data_addr(game->textures[i],

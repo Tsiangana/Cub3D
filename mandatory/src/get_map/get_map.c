@@ -42,7 +42,7 @@ void	verify_empty_map(char *str)
 	}
 	if (on == 0)
 	{
-		printf("error: Mapa invalido\n");
+		printf("Error: Mapa invalido\n");
 		free(str);
 		exit(1);
 	}

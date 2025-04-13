@@ -98,7 +98,7 @@ void	verifybreakline(char *str)
 			{
 				printf("error: Mapa invalido\n");
 				free(str);
-				exit(1);
+				exit(0);
 			}
 		}
 		k++;
@@ -121,11 +121,10 @@ int	verify_characters(t_game *game)
 		while (game->map[y][x] != '\0')
 		{
 			c = game->map[y][x];
-			aux_verify_characters(c);
+			if (aux_verify_characters(c))
+				return (1);
 			if (c == 'W' || c == 'N' || c == 'S' || c == 'E')
-			{
 				count++;
-			}
 			x++;
 		}
 		y++;

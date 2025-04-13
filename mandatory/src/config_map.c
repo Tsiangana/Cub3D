@@ -32,6 +32,7 @@ void	parse_line(t_game *game, char *line)
 	{
 		printf("Erro: chave inválida%s\n", line);
 		free_all(game);
+		exit(0);
 	}
 	return ;
 }

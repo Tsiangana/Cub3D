@@ -25,7 +25,7 @@ void	aux_verifybreakline(char *str)
 			{
 				printf("error: Mapa invalido\n");
 				free(str);
-				exit(1);
+				exit(0);
 			}
 			break ;
 		}
@@ -38,6 +38,7 @@ int	aux_verify_characters(int c)
 	if (c != '1' && c != '0' && c != 'N' && c != 'S' && c != 'E' && c != 'W'
 		&& c != ' ' && c != '\n' && c != '\t')
 		return (1);
+	return (0);
 }
 
 int	has_invalid_zero_around(t_game *game, int y, int x)

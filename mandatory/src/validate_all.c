@@ -93,12 +93,14 @@ static void	aux_validate_all(t_game *game)
 	{
 		printf("Error: Chave invalida\n");
 		free_all(game);
+		exit(0);
 	}
 	if (is_valid_color(game->ceiling_color)
 		|| is_valid_color(game->floor_color))
 	{
 		printf("Error: cor invalida\n");
 		free_all(game);
+		exit(0);
 	}
 }
 
@@ -108,6 +110,7 @@ void	validate_all(t_game *game)
 	{
 		printf("Error: Mapa invalido\n");
 		free_all(game);
+		exit(0);
 	}
 	add_space(game);
 	aux_validate_all(game);
@@ -115,6 +118,7 @@ void	validate_all(t_game *game)
 	{
 		printf("Error: Mapa invalido\n");
 		free_all(game);
+		exit(0);
 	}
 	else
 	{
